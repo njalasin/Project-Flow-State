@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr5yac5muud8x"]
+
+[ext_resource type="PackedScene" uid="uid://si14ee3ktnxa" path="res://Scenes/player.tscn" id="1_ibqyl"]
+
+[sub_resource type="Environment" id="Environment_txffy"]
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ifwu"]
+size = Vector3(20, 0, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ot18k"]
+albedo_color = Color(0.427493, 0.427493, 0.427493, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2la21"]
+material = SubResource("StandardMaterial3D_ot18k")
+size = Vector2(20, 20)
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_txffy")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_4ifwu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_2la21")
+
+[node name="Player" parent="." instance=ExtResource("1_ibqyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05683, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 19)
