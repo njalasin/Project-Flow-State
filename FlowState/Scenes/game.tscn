@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cr5yac5muud8x"]
 
-[ext_resource type="PackedScene" uid="uid://si14ee3ktnxa" path="res://Scenes/player.tscn" id="1_ibqyl"]
+[ext_resource type="PackedScene" uid="uid://c6x1jxr7cx4a8" path="res://Scenes/player.tscn" id="1_4s3yl"]
 
 [sub_resource type="Environment" id="Environment_txffy"]
 background_mode = 1
@@ -29,8 +29,7 @@ shape = SubResource("BoxShape3D_4ifwu")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_2la21")
 
-[node name="Player" parent="." instance=ExtResource("1_ibqyl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05683, 0)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 19)
+transform = Transform3D(0.98196, -0.186545, -0.0309249, 0.186593, 0.929442, 0.31831, -0.0306363, -0.318338, 0.947482, 0, 13, 19)
+
+[node name="Player" parent="." instance=ExtResource("1_4s3yl")]

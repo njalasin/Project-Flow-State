@@ -1,35 +1,187 @@
-[gd_scene load_steps=5 format=3 uid="uid://si14ee3ktnxa"]
+[gd_scene load_steps=9 format=3 uid="uid://c6x1jxr7cx4a8"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_yo7n6"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_ywxvp"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6jn2f"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cofru"]
+albedo_color = Color(0, 0.756863, 1, 1)
+roughness = 0.2
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_l4bn5"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vw68u"]
+material = SubResource("StandardMaterial3D_cofru")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_idt4q"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ck6ss"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_controller", "crouch_shapecast")]
-script = ExtResource("1_yo7n6")
-player = null
+[sub_resource type="Animation" id="Animation_6agc2"]
+resource_name = "Crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:shape:height")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.25, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:mesh:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 1.5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeshInstance3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.25, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fw0ho"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:mesh:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeshInstance3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nwnxu"]
+_data = {
+"Crouch": SubResource("Animation_6agc2"),
+"RESET": SubResource("Animation_fw0ho")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rnwg6"]
+radius = 0.4
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera_controller", "animation_player", "crouch_shapecast") groups=["Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 15
+script = ExtResource("1_ywxvp")
 camera_controller = NodePath("Pivot/Camera3D")
+animation_player = NodePath("AnimationPlayer")
 crouch_shapecast = NodePath("ShapeCast3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14672, 0)
-shape = SubResource("CapsuleShape3D_6jn2f")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14382, 0)
-mesh = SubResource("CapsuleMesh_l4bn5")
+mesh = SubResource("CapsuleMesh_vw68u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ck6ss")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nwnxu")
+}
 
 [node name="Pivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64661, -0.361923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0255395)
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Pivot/Camera3D"]
+update_mode = 1
 
 [node name="ProjectileSpawn" type="Marker3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.786157)
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.23509, 0)
-shape = SubResource("SphereShape3D_idt4q")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12412, 0)
+shape = SubResource("SphereShape3D_rnwg6")
+target_position = Vector3(0, -0.5, 0)
+debug_shape_custom_color = Color(0, 1, 0, 1)
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

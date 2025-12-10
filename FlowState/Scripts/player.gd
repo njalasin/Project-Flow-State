@@ -67,6 +67,7 @@ func _input(event):
 	if event.is_action_released("crouch") && is_on_floor():
 		if crouch_shapecast.is_colliding() == false:
 			crouching(false)
+			_is_crouching = false
 		elif crouch_shapecast.is_colliding() == true:
 			uncrouch_check()
 
@@ -131,12 +132,12 @@ func toggle_crouch():
 		crouching(false)
 	elif _is_crouching == false:
 		crouching(true)
-
 # Plays animation for crouching when called
 func crouching(state : bool):
 	match state:
 		true:
 			animation_player.play("Crouch", 0, crouch_speed)
+			animation_player.seek(0.0, true)
 			set_movement_speed("crouching")
 		false:
 			animation_player.play("Crouch", 0, -crouch_speed, true)
@@ -163,8 +164,10 @@ func shoot():
 	
 	canShoot = false
 	$ShootTimer.start()
+	
 func on_shoot_timer_timeout():
 	canShoot = true
+
 func die():
 	queue_free()
 	if(canRespawn == true):
@@ -189,3 +192,4 @@ func respawn():
 	var player = player.instantiate()
 	print("respawned")
 	get_tree().current_scene.add_child(player)
+
