@@ -51,6 +51,11 @@ func _input(event):
 	# Quits the game is "exit" key is pressed
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
+	
+	# Sets Player transform to original "spawn" point
+	if event.is_action_pressed("respawn"):
+		global_transform = Transform3D.IDENTITY
+		global_transform.origin = Vector3(0, 1, 0)
 		
 	# Crouches/uncrouches the player when "crouch_toggle" key is pressed
 	if event.is_action_pressed("crouch_toggle") && is_on_floor():

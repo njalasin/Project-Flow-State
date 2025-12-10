@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://si14ee3ktnxa" path="res://Scenes/player.tscn" id="1_ibqyl"]
 
 [sub_resource type="Environment" id="Environment_txffy"]
-ambient_light_color = Color(1, 1, 1, 1)
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4ifwu"]
 size = Vector3(20, 0, 20)
