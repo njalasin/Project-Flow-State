@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv5smctfidvwg"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xbixr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5jq7"]
+albedo_color = Color(0.223103, 0.223103, 0.223103, 1)
+metallic = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kfrn7"]
+
+[node name="Roller" type="CharacterBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xbixr")
+surface_material_override/0 = SubResource("StandardMaterial3D_d5jq7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_kfrn7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

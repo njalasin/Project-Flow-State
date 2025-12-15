@@ -1,35 +1,97 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr5yac5muud8x"]
+[gd_scene load_steps=16 format=3 uid="uid://cr5yac5muud8x"]
 
 [ext_resource type="PackedScene" uid="uid://c6x1jxr7cx4a8" path="res://Scenes/player.tscn" id="1_4s3yl"]
+[ext_resource type="Shader" path="res://Shaders/SkyShader.gdshader" id="1_kw0p4"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_rskcw"]
+[ext_resource type="Resource" path="res://Terrain/data.hterrain" id="2_i3vg0"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_v2n27"]
 
-[sub_resource type="Environment" id="Environment_txffy"]
-background_mode = 1
-background_color = Color(1, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pabtu"]
+shader = ExtResource("1_kw0p4")
+shader_parameter/skyColor = Color(0.163493, 0.0012196, 0.178489, 1)
+shader_parameter/horizonColor = Color(0, 0, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4ifwu"]
-size = Vector3(20, 0, 20)
+[sub_resource type="Sky" id="Sky_7c4i5"]
+sky_material = SubResource("ShaderMaterial_pabtu")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ot18k"]
-albedo_color = Color(0.427493, 0.427493, 0.427493, 1)
+[sub_resource type="Environment" id="Environment_mntny"]
+background_mode = 2
+sky = SubResource("Sky_7c4i5")
+ambient_light_source = 3
+ambient_light_energy = 0.1
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_2la21"]
-material = SubResource("StandardMaterial3D_ot18k")
-size = Vector2(20, 20)
+[sub_resource type="Resource" id="Resource_b5p7j"]
+script = ExtResource("3_v2n27")
+mode = 0
+textures = [[], []]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfh4c"]
+albedo_color = Color(0.380392, 1, 1, 1)
+metallic = 1.0
+roughness = 0.41
+
+[sub_resource type="BoxMesh" id="BoxMesh_1nfd1"]
+material = SubResource("StandardMaterial3D_gfh4c")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jabjp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1asq"]
+albedo_color = Color(1, 0.670588, 1, 1)
+metallic = 1.0
+roughness = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_1xi4r"]
+material = SubResource("StandardMaterial3D_o1asq")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jcb2p"]
 
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_txffy")
+environment = SubResource("Environment_mntny")
 
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_4ifwu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("PlaneMesh_2la21")
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("1_rskcw")
+centered = true
+_terrain_data = ExtResource("2_i3vg0")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_b5p7j")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale_per_texture = null
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+shader_params/u_globalmap_blend_start = null
+shader_params/u_globalmap_blend_distance = null
+shader_params/u_colormap_opacity_per_texture = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.98196, -0.186545, -0.0309249, 0.186593, 0.929442, 0.31831, -0.0306363, -0.318338, 0.947482, 0, 13, 19)
+transform = Transform3D(0.98196, -0.186546, -0.0309255, -0.140168, -0.827873, 0.54312, -0.126919, -0.528987, -0.839085, 0, 13, 19)
+shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_4s3yl")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1.62047, 0, 1.17221, 0, 2, 0, -1.17221, 0, 1.62047, -4.67248, 1.0266, 6.93073)
+mesh = SubResource("BoxMesh_1nfd1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_jabjp")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(1.62047, 0, 1.17221, 0, 2, 0, -1.17221, 0, 1.62047, 1.96231, 1.0266, 4.97666)
+mesh = SubResource("SphereMesh_1xi4r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("SphereShape3D_jcb2p")
