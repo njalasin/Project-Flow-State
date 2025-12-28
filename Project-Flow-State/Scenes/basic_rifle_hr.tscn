@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0pdobhe7w2uu"]
+
+[ext_resource type="PackedScene" uid="uid://cb6w56tiropl7" path="res://Assets/Styloo Guns Asset Pack GLTF FBX V1.1/Normal version Color and NormalMap/GLB/ak47.glb" id="1_138f4"]
+
+[node name="basic_rifle_hr" type="MeshInstance3D"]
+
+[node name="ak47" parent="." instance=ExtResource("1_138f4")]

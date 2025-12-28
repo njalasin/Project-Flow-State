@@ -10,6 +10,7 @@ extends CharacterBody3D
 @export var jump_velocity = 4.5
 @export var shot : PackedScene
 @export var player : PackedScene
+@export var current_weapon : PackedScene
 @export var mouse_sensitivity : float = 0.5
 @export var tilt_lower_limit := deg_to_rad(-90.0)
 @export var tilt_upper_limit := deg_to_rad(90.0)
@@ -19,6 +20,13 @@ extends CharacterBody3D
 @export var canRespawn : bool = true
 @export_range(5, 10, 0.1) var crouch_speed : float = 7.0
 
+@onready var camera = $Pivot/Camera3D
+@onready var raycast = $Pivot/Camera3D/InteractionRay
+@onready var hand = $Pivot/Camera3D/Hand
+@onready var basic_rifle_hr = preload("res://Scenes/basic_rifle_hr.tscn")
+@onready var basic_rifle = preload("res://Scenes/basic_rifle.tscn")
+@onready var basic_sniper_hr = preload("res://Scenes/basic_sniper_hr.tscn")
+@onready var basic_sniper = preload("res://Scenes/basic_sniper.tscn")
 # Private variables
 var _speed : float
 var canShoot = true
@@ -30,6 +38,10 @@ var _mouse_rotation : Vector3
 var _rotation_input : float
 var _tilt_input : float
 var _is_crouching : bool = false
+var current_interactable = null
+var weapon_to_spawn = null
+var weapon_to_drop = null
+var hovered_weapon_type = null
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -44,10 +56,10 @@ func _ready():
 	
 	# add crouch check shapecast collision exception for CharacterBody3D node
 	crouch_shapecast.add_exception($".")
-
+func _process(_delta):
+	pass
 # This function will handle all possible inputs (see project input map settings) and make them do something
 func _input(event):
-	
 	# Quits the game is "exit" key is pressed
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
@@ -70,20 +82,31 @@ func _input(event):
 			_is_crouching = false
 		elif crouch_shapecast.is_colliding() == true:
 			uncrouch_check()
-
+	
+	# Allows for interaction with interactable objects using the "interact" key
+	if event.is_action_pressed("interact"):
+		activate()
+		find_weapon_hand()
+		spawn_weapon_hand()
 # This function is called every frame
 func _physics_process(delta):
+	do_gravity(delta)
+	_update_camera(delta)
+	jump()
+	do_movement()
+	move_and_slide()
+	check_hover_collision()
+# Add the gravity.
+func do_gravity(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	
-	# Rotate camera relative to mouse movement
-	_update_camera(delta)
-	
-	# Handle jump.
+# Handle jump.
+func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() && _is_crouching == false:
 		velocity.y = jump_velocity
-
+# Get the input direction and handle the movement/deceleration.
+func do_movement():
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -96,17 +119,12 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, _speed)
 		velocity.z = move_toward(velocity.z, 0, _speed)
-
-	# Moves body based on velocity and allows for body to body physics interaction
-	move_and_slide()
-
 # This function allows mouse controls to exist
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input:
 		_rotation_input = -event.relative.x * mouse_sensitivity
 		_tilt_input = -event.relative.y * mouse_sensitivity
-
 # This function rotates the camera relative to player mouse movements
 func _update_camera(delta):
 	
@@ -125,7 +143,6 @@ func _update_camera(delta):
 	
 	_rotation_input = 0.0
 	_tilt_input = 0.0
-
 # Crouch/uncrouch the player when able
 func toggle_crouch():
 	if _is_crouching == true && crouch_shapecast.is_colliding() == false:
@@ -142,7 +159,6 @@ func crouching(state : bool):
 		false:
 			animation_player.play("Crouch", 0, -crouch_speed, true)
 			set_movement_speed("default")
-
 # For use with non toggled crouching, makes sure player is able to stand up when exiting smaller areas
 func uncrouch_check():
 	if crouch_shapecast.is_colliding() == false:
@@ -150,34 +166,28 @@ func uncrouch_check():
 	if crouch_shapecast.is_colliding() == true:
 		await get_tree().create_timer(0.1).timeout
 		uncrouch_check()
-
 # Simple function to allow player to take damage when hit
 func take_dmg(dmg):
 	hp -= dmg
 	if(hp<=0):
 		die()
-
 # Simple shoot function, using a prefab rather than a raycast
 func shoot():
 	var shot = shot.instantiate()
 	get_tree().current_scene.add_child(shot)
 	
 	canShoot = false
-	$ShootTimer.start()
-	
+	$ShootTimer.start()	
 func on_shoot_timer_timeout():
 	canShoot = true
-
 func die():
 	queue_free()
 	if(canRespawn == true):
 		respawn()
-
 # Called when animation player starts
 func _on_animation_player_animation_started(anim_name):
 	if anim_name == "Crouch":
 		_is_crouching = !_is_crouching
-
 # Allows for dynamic movement speed alterations
 # When using this function, pass in a string listed in the match statement
 func set_movement_speed(state : String):
@@ -187,9 +197,57 @@ func set_movement_speed(state : String):
 			_speed = speed_default
 		"crouching":
 			_speed = speed_crouch
-
 func respawn():
 	var player = player.instantiate()
 	print("respawned")
 	get_tree().current_scene.add_child(player)
-
+func check_hover_collision():
+	if raycast.is_colliding():
+		var hover_collider = raycast.get_collider()
+		if hover_collider and is_instance_valid(hover_collider) and hover_collider.has_method("interact") and hover_collider.has_method("show_label"):
+			if current_interactable != hover_collider:
+				if current_interactable != null:
+					current_interactable.hide_label()
+				current_interactable = hover_collider
+				current_interactable.show_label()
+		else:
+			hide_current_label()
+	else:
+		hide_current_label()
+func hide_current_label():
+	if is_instance_valid(current_interactable):
+		current_interactable.hide_label()
+		current_interactable = null
+func activate():
+	var hit = raycast.get_collider()
+	if raycast.is_colliding():
+		if hit and hit.has_method("interact"):
+			hit.interact()
+func find_weapon_hand():
+	if raycast.is_colliding() and raycast.get_collider() != null:
+		if raycast.get_collider().get_name() == "basic_rifle":
+			weapon_to_spawn = basic_rifle_hr.instantiate()
+		elif raycast.get_collider().get_name() == "basic_sniper":
+			weapon_to_spawn = basic_sniper_hr.instantiate()
+		else:
+			weapon_to_spawn = null
+	else:
+		weapon_to_spawn = null
+	
+	if hand.get_child_count() > 0:
+		if hand.get_child(0) != null:
+			if hand.get_child(0).get_name() == "basic_rifle_hr":
+				weapon_to_drop = basic_rifle.instantiate()
+			elif hand.get_child(0).get_name() == "basic_sniper_hr":
+				weapon_to_drop = basic_sniper.instantiate()
+		else:
+			weapon_to_drop = null
+func spawn_weapon_hand():
+	if weapon_to_spawn != null:
+			if hand.get_child(0) != null:
+				get_parent().add_child(weapon_to_drop)
+				weapon_to_drop.global_transform = hand.global_transform
+				weapon_to_drop.dropped = true
+				hand.get_child(0).queue_free()
+			raycast.get_collider().queue_free()
+			hand.add_child(weapon_to_spawn)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b32kpr05nwd5y"]
+
+[ext_resource type="Script" path="res://Scenes/item_basic_sniper.gd" id="1_0mflk"]
+[ext_resource type="PackedScene" uid="uid://bhqejqhfeu38m" path="res://Assets/Styloo Guns Asset Pack GLTF FBX V1.1/Normal version Color and NormalMap/GLB/awp.glb" id="1_hqum8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bs6kh"]
+size = Vector3(1.12753, 0.201904, 0.0800781)
+
+[node name="basic_sniper" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_0mflk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0183258, 0.0118408, -0.00177002)
+shape = SubResource("BoxShape3D_bs6kh")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30756, 0)
+visible = false
+billboard = 1
+text = "Pick up Basic Sniper
+"
+
+[node name="awp2" parent="." instance=ExtResource("1_hqum8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.203289, -0.0278201, 0)

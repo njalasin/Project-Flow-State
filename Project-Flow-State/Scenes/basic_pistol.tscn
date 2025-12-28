@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://br7u7terh0rar"]
+
+[ext_resource type="Script" path="res://item_basic_pistol.gd" id="1_vmjn8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dypoy"]
+
+[node name="basic_pistol" type="RigidBody3D"]
+script = ExtResource("1_vmjn8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_dypoy")

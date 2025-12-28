@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dge57hg82lnfg"]
+
+[ext_resource type="Script" path="res://Scenes/item_basic_rifle.gd" id="1_rxtj8"]
+[ext_resource type="PackedScene" uid="uid://cb6w56tiropl7" path="res://Assets/Styloo Guns Asset Pack GLTF FBX V1.1/Normal version Color and NormalMap/GLB/ak47.glb" id="2_n8cye"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x5pbu"]
+size = Vector3(0.745605, 0.34375, 0.0869141)
+
+[node name="basic_rifle" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_rxtj8")
+
+[node name="ak472" parent="." instance=ExtResource("2_n8cye")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108154, 0, 0)
+shape = SubResource("BoxShape3D_x5pbu")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+visible = false
+billboard = 1
+text = "Pick up Basic Rifle"
