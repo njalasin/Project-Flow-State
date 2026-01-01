@@ -1,10 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://cr5yac5muud8x"]
+[gd_scene load_steps=16 format=3 uid="uid://cr5yac5muud8x"]
 
 [ext_resource type="PackedScene" uid="uid://c6x1jxr7cx4a8" path="res://Scenes/player.tscn" id="1_4s3yl"]
 [ext_resource type="Shader" path="res://Shaders/SkyShader.gdshader" id="1_kw0p4"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_rskcw"]
-[ext_resource type="Resource" path="res://Terrain/data.hterrain" id="2_i3vg0"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_v2n27"]
 [ext_resource type="PackedScene" uid="uid://dge57hg82lnfg" path="res://Scenes/basic_rifle.tscn" id="6_undtf"]
 [ext_resource type="PackedScene" uid="uid://b32kpr05nwd5y" path="res://Scenes/basic_sniper.tscn" id="7_e3hng"]
 
@@ -21,11 +18,6 @@ background_mode = 2
 sky = SubResource("Sky_7c4i5")
 ambient_light_source = 3
 ambient_light_energy = 0.1
-
-[sub_resource type="Resource" id="Resource_b5p7j"]
-script = ExtResource("3_v2n27")
-mode = 0
-textures = [[], []]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfh4c"]
 albedo_color = Color(0.380392, 1, 1, 1)
@@ -49,32 +41,14 @@ material = SubResource("StandardMaterial3D_o1asq")
 [sub_resource type="SphereShape3D" id="SphereShape3D_jcb2p"]
 radius = 1.00922
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_cv4nk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0wlms"]
+
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mntny")
-
-[node name="HTerrain" type="Node3D" parent="."]
-script = ExtResource("1_rskcw")
-centered = true
-_terrain_data = ExtResource("2_i3vg0")
-chunk_size = 32
-collision_enabled = true
-collision_layer = 2
-collision_mask = 13
-shader_type = "Classic4"
-custom_shader = null
-custom_globalmap_shader = null
-texture_set = SubResource("Resource_b5p7j")
-render_layers = 1
-cast_shadow = 1
-shader_params/u_ground_uv_scale_per_texture = null
-shader_params/u_depth_blending = true
-shader_params/u_triplanar = null
-shader_params/u_tile_reduction = null
-shader_params/u_globalmap_blend_start = null
-shader_params/u_globalmap_blend_distance = null
-shader_params/u_colormap_opacity_per_texture = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.98196, -0.186546, -0.0309255, -0.140168, -0.827873, 0.54312, -0.126919, -0.528987, -0.839085, 0, 13, 19)
@@ -119,3 +93,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12561, 1.13242, -4.26378)
 
 [node name="basic_rifle5" parent="." instance=ExtResource("6_undtf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.785814, 1.13242, -5.74713)
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 13
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+mesh = SubResource("PlaneMesh_cv4nk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 0, -30, 0)
+shape = SubResource("BoxShape3D_0wlms")

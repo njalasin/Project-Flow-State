@@ -255,7 +255,7 @@ func spawn_weapon_hand():
 			get_parent().add_child(weapon_to_drop)
 			weapon_to_drop.global_transform = hand.global_transform
 			if weapon_to_drop is RigidBody3D:
-				weapon_to_drop.apply_impulse(Vector3(3, 0, 0))
+				weapon_to_drop.apply_impulse(-global_transform.basis.z * 2 + Vector3.DOWN * 10)
 			hand.get_child(0).queue_free()
 			weapon_to_drop = null
 		# Remove pickup from world

@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://bhqejqhfeu38m" path="res://Assets/Styloo Guns Asset Pack GLTF FBX V1.1/Normal version Color and NormalMap/GLB/awp.glb" id="1_hqum8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bs6kh"]
-size = Vector3(1.12753, 0.201904, 0.0800781)
+size = Vector3(1.12753, 0.201904, 0.0458984)
 
 [node name="basic_sniper" type="RigidBody3D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_1m7a4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
