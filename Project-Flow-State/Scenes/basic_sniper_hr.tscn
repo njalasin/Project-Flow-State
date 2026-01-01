@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cagumqjqjiffv"]
+[gd_scene load_steps=3 format=3 uid="uid://cagumqjqjiffv"]
 
+[ext_resource type="Script" path="res://Scripts/basic_sniper_hr.gd" id="1_6accs"]
 [ext_resource type="PackedScene" uid="uid://bhqejqhfeu38m" path="res://Assets/Styloo Guns Asset Pack GLTF FBX V1.1/Normal version Color and NormalMap/GLB/awp.glb" id="1_avtrn"]
 
 [node name="basic_sniper_hr" type="MeshInstance3D"]
+script = ExtResource("1_6accs")
 
 [node name="awp2" parent="." instance=ExtResource("1_avtrn")]

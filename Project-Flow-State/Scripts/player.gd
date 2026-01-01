@@ -45,17 +45,28 @@ var hovered_weapon_type = null
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+# Classes
+var weapon_data := {}
+
 # This function is called when the object this script is attached to is instantiated during play
 func _ready():
-	
 	# Get mouse input
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 	# Set speed to default
 	_speed = speed_default
-	
 	# add crouch check shapecast collision exception for CharacterBody3D node
 	crouch_shapecast.add_exception($".")
+	# populate weapon_data class at runtime
+	weapon_data = {
+		"basic_rifle": {
+			"world": basic_rifle,
+			"hand": basic_rifle_hr
+		},
+		"basic_sniper": {
+			"world": basic_sniper,
+			"hand": basic_sniper_hr
+		}
+	}
 func _process(_delta):
 	pass
 # This function will handle all possible inputs (see project input map settings) and make them do something
@@ -224,30 +235,34 @@ func activate():
 		if hit and hit.has_method("interact"):
 			hit.interact()
 func find_weapon_hand():
-	if raycast.is_colliding() and raycast.get_collider() != null:
-		if raycast.get_collider().get_name() == "basic_rifle":
-			weapon_to_spawn = basic_rifle_hr.instantiate()
-		elif raycast.get_collider().get_name() == "basic_sniper":
-			weapon_to_spawn = basic_sniper_hr.instantiate()
-		else:
-			weapon_to_spawn = null
-	else:
-		weapon_to_spawn = null
+	if raycast.is_colliding():
+		var collider = raycast.get_collider()
+		if collider and collider.get("weapon_id"):
+			var id = collider.get("weapon_id")
+			if weapon_data.get(id):
+				weapon_to_spawn = weapon_data[id]["hand"].instantiate()
 	
 	if hand.get_child_count() > 0:
-		if hand.get_child(0) != null:
-			if hand.get_child(0).get_name() == "basic_rifle_hr":
-				weapon_to_drop = basic_rifle.instantiate()
-			elif hand.get_child(0).get_name() == "basic_sniper_hr":
-				weapon_to_drop = basic_sniper.instantiate()
-		else:
-			weapon_to_drop = null
+		var held = hand.get_child(0)
+		if held and held.get("weapon_id"):
+			var id = held.get("weapon_id")
+			if weapon_data.get(id):
+				weapon_to_drop = weapon_data[id]["world"].instantiate()
 func spawn_weapon_hand():
 	if weapon_to_spawn != null:
-			if hand.get_child(0) != null:
-				get_parent().add_child(weapon_to_drop)
-				weapon_to_drop.global_transform = hand.global_transform
-				weapon_to_drop.dropped = true
-				hand.get_child(0).queue_free()
-			raycast.get_collider().queue_free()
-			hand.add_child(weapon_to_spawn)
+		# Drop current weapon ONLY if it exists
+		if hand.get_child_count() > 0 and weapon_to_drop != null:
+			get_parent().add_child(weapon_to_drop)
+			weapon_to_drop.global_transform = hand.global_transform
+			if weapon_to_drop is RigidBody3D:
+				weapon_to_drop.apply_impulse(Vector3(3, 0, 0))
+			hand.get_child(0).queue_free()
+			weapon_to_drop = null
+		# Remove pickup from world
+		var pickup = raycast.get_collider()
+		if pickup:
+			pickup.queue_free()
+		# Equip new weapon
+		hand.add_child(weapon_to_spawn)
+		weapon_to_spawn.global_transform = hand.global_transform
+		weapon_to_spawn = null

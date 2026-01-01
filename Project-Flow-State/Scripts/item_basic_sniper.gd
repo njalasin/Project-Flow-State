@@ -1,12 +1,10 @@
 extends RigidBody3D
 
 @onready var label: Label3D = $Label3D
-var dropped = false
+@export var weapon_id = "basic_sniper"
 
 func _process(delta):
-	if dropped == true:
-		apply_impulse(Vector3(3, 0, 0))
-		dropped = false
+	pass
 func interact():
 	print("Picked up Basic Sniper")
 	queue_free()

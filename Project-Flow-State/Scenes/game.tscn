@@ -107,3 +107,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13242, -4.26378)
 
 [node name="basic_sniper" parent="." instance=ExtResource("7_e3hng")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57164, 0.986829, -4.36836)
+
+[node name="basic_rifle2" parent="." instance=ExtResource("6_undtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.784137, 1.13242, -5.19603)
+
+[node name="basic_rifle3" parent="." instance=ExtResource("6_undtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26484, -5.67696)
+
+[node name="basic_rifle4" parent="." instance=ExtResource("6_undtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12561, 1.13242, -4.26378)
+
+[node name="basic_rifle5" parent="." instance=ExtResource("6_undtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.785814, 1.13242, -5.74713)
