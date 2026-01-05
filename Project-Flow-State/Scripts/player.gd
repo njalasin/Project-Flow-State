@@ -4,6 +4,7 @@ class_name PlayerController extends CharacterBody3D
 @export var debug : bool = false
 @export_category("References")
 @export var camera : CameraController
+@export var camera_effects : CameraEffects
 @export var state_chart : StateChart
 @export var standing_collision : CollisionShape3D
 @export var crouching_collision : CollisionShape3D
@@ -22,6 +23,7 @@ class_name PlayerController extends CharacterBody3D
 @export var crouch_speed : float = -5.0
 @export_category("Jump Settings")
 @export var jump_velocity = 4.5
+@export var fall_velocity_threshold : float = -5.0
 @export_category("Miscellaneous")
 @export var canRespawn : bool = true
 @export var shot : PackedScene
@@ -40,6 +42,7 @@ var _movement_velocity : Vector3 = Vector3.ZERO
 var sprint_modifier : float = 0.0
 var crouch_modifier : float = 0.0
 var _input_dir : Vector2 = Vector2.ZERO
+var current_fall_velocity : float
 var canShoot = true
 var _is_crouching : bool
 var current_interactable = null
@@ -47,7 +50,6 @@ var weapon_to_spawn = null
 var weapon_to_drop = null
 var hovered_weapon_type = null
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
-
 # Classes
 var weapon_data := {}
 
@@ -129,6 +131,13 @@ func walk() -> void:
 	sprint_modifier = 0.0 # Set speed back to default
 func jump() -> void: # Handle jump.
 	velocity.y += jump_velocity
+func check_fall_speed() -> bool:
+	if current_fall_velocity < fall_velocity_threshold:
+		current_fall_velocity = 0.0
+		return true
+	else:
+		current_fall_velocity = 0.0
+		return false
 # DAMAGE AND COLLISION
 func take_dmg(dmg) -> void: # Simple function to allow player to take damage when hit
 	hp -= dmg
