@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://c1qoup72pqbbk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8xkh"]
+albedo_color = Color(0.252028, 0.252028, 0.252028, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fhx2q"]
+material = SubResource("StandardMaterial3D_t8xkh")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4jr6y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdca0"]
+albedo_color = Color(0.443137, 0.8, 1, 1)
+metallic = 0.2
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_py3ln"]
+material = SubResource("StandardMaterial3D_bdca0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_doff3"]
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xtmp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_00lq7"]
+material = SubResource("StandardMaterial3D_3xtmp")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fiqos"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yytuu"]
+
+[sub_resource type="Sky" id="Sky_to0tq"]
+sky_material = SubResource("ProceduralSkyMaterial_yytuu")
+
+[sub_resource type="Environment" id="Environment_gb5i8"]
+background_mode = 2
+background_color = Color(0.581033, 0.581033, 0.581033, 1)
+sky = SubResource("Sky_to0tq")
+
+[node name="PrototypeLevel" type="Node3D"]
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Geometry"]
+collision_layer = 2
+collision_mask = 13
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Floor"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
+mesh = SubResource("BoxMesh_fhx2q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Floor"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
+shape = SubResource("BoxShape3D_4jr6y")
+
+[node name="Platform" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 3, 0)
+collision_layer = 2
+collision_mask = 15
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Platform"]
+transform = Transform3D(2, 0, 0, 0, 0.2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_py3ln")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Platform"]
+shape = SubResource("BoxShape3D_doff3")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 11
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_00lq7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_fiqos")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gb5i8")
