@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c6x1jxr7cx4a8"]
+[gd_scene load_steps=26 format=3 uid="uid://c6x1jxr7cx4a8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ywxvp"]
 [ext_resource type="Script" path="res://Scripts/MouseCapture.gd" id="2_4y02e"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="5_7w6uh"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_u6s1a"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_na1oa"]
-[ext_resource type="Script" path="res://Scripts/step_handler.gd" id="7_umkhq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_6wvqr"]
 [ext_resource type="Script" path="res://Scripts/state_machine.gd" id="9_ki6k6"]
 [ext_resource type="Script" path="res://Scripts/idle_state.gd" id="10_pksbh"]
@@ -35,7 +34,7 @@ material = SubResource("StandardMaterial3D_cofru")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6w7nj"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camera_effects", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast", "step_handler") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camera_effects", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast") groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_mask = 11
 script = ExtResource("1_ywxvp")
@@ -46,14 +45,13 @@ standing_collision = NodePath("StandingCollision")
 crouching_collision = NodePath("CrouchingCollision")
 crouch_check = NodePath("CrouchCheck")
 interaction_raycast = NodePath("CameraController/Camera3D/InteractionRay")
-step_handler = NodePath("Components/StepHandler")
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("2_bxl2m")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 455.0
-offset_bottom = 646.0
+offset_right = 75.0
+offset_bottom = 50.0
 grow_horizontal = 1
 grow_vertical = 1
 initial_node_to_watch = NodePath("../StateChart")
@@ -103,10 +101,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.208616, -0.0728612, -0.5458
 
 [node name="MouseCapture" type="Node" parent="Components"]
 script = ExtResource("2_4y02e")
-
-[node name="StepHandler" type="Node" parent="Components" node_paths=PackedStringArray("player_controller")]
-script = ExtResource("7_umkhq")
-player_controller = NodePath("../..")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_imt0v")

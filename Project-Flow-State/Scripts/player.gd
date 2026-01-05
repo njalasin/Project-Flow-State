@@ -10,6 +10,7 @@ class_name PlayerController extends CharacterBody3D
 @export var crouching_collision : CollisionShape3D
 @export var crouch_check : ShapeCast3D
 @export var interaction_raycast : RayCast3D
+@export var step_handler : StepHandlerComponent
 @export_category("Stats")
 @export var max_hp = 100 # Instantiate variable max_hp
 @export var hp = 100 # Instantiate variable hp
@@ -43,6 +44,7 @@ var sprint_modifier : float = 0.0
 var crouch_modifier : float = 0.0
 var _input_dir : Vector2 = Vector2.ZERO
 var current_fall_velocity : float
+var previous_velocity : Vector3
 var canShoot = true
 var _is_crouching : bool
 var current_interactable = null
@@ -82,6 +84,9 @@ func _input(event) -> void:
 func _physics_process(delta) -> void: # This function is called every frame
 	do_gravity(delta)
 	do_movement()
+	if is_on_floor():
+		step_handler.handle_step_climbing()
+	previous_velocity = velocity
 	check_hover_collision()
 	# Ensure the shapecast updates its collision info
 	crouch_check.force_shapecast_update() 
@@ -116,6 +121,8 @@ func do_movement() -> void: # Get the input direction and handle the movement/de
 	_movement_velocity = Vector3(current_velocity.x, velocity.y, current_velocity.y)
 	velocity = _movement_velocity
 	move_and_slide()
+func get_input_direction() -> Vector2:
+	return _input_dir
 # STATES
 func crouch() -> void: # Plays "animation" for crouching when called
 	crouch_modifier = crouch_speed
