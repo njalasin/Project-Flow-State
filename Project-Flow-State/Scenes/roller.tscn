@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv5smctfidvwg"]
+[gd_scene load_steps=6 format=3 uid="uid://cv5smctfidvwg"]
+
+[ext_resource type="Script" uid="uid://bhdijrxxscgxc" path="res://Assets/scripts/enemy/enemy_step_handler.gd" id="1_1e0an"]
+[ext_resource type="Script" uid="uid://ckppfpigf38kd" path="res://Assets/scripts/enemy/enemy_controller.gd" id="1_73gwc"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_xbixr"]
 
@@ -8,7 +11,12 @@ metallic = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kfrn7"]
 
-[node name="Roller" type="CharacterBody3D"]
+[node name="Roller" type="CharacterBody3D" node_paths=PackedStringArray("enemy_step_handler", "standing_collision") groups=["enemy"]]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource("1_73gwc")
+enemy_step_handler = NodePath("Components/EnemyStepHandler")
+standing_collision = NodePath("CollisionShape3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_xbixr")
@@ -17,4 +25,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_d5jq7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_kfrn7")
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+navigation_layers = 2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Components" type="Node" parent="."]
+
+[node name="EnemyStepHandler" type="Node" parent="Components" node_paths=PackedStringArray("enemy_controller")]
+script = ExtResource("1_1e0an")
+enemy_controller = NodePath("../..")

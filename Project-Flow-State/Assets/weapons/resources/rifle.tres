@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://cf8u7pabonlrd"]
+
+[ext_resource type="PackedScene" uid="uid://wrsint1fpha3" path="res://Scenes/projectile.tscn" id="1_lvpjc"]
+[ext_resource type="Script" uid="uid://ct5rrklmoi04u" path="res://Assets/scripts/weapons/weapon.gd" id="1_nkqoe"]
+[ext_resource type="PackedScene" uid="uid://dge57hg82lnfg" path="res://Scenes/basic_rifle.tscn" id="2_rqvqs"]
+
+[resource]
+script = ExtResource("1_nkqoe")
+fire_rate = 10.0
+is_automatic = true
+is_hitscan = false
+weapon_model = ExtResource("2_rqvqs")
+projectile_scene = ExtResource("1_lvpjc")
+metadata/_custom_type_script = "uid://ct5rrklmoi04u"

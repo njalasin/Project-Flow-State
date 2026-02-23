@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cinfdiwxml318"]
 
-[ext_resource type="Script" path="res://addons/godot_state_charts_examples/save_and_load/color_box/color_box.gd" id="1_3xrxu"]
+[ext_resource type="Script" uid="uid://crd0csh0x7405" path="res://addons/godot_state_charts_examples/save_and_load/color_box/color_box.gd" id="1_3xrxu"]
 
 [node name="ColorBox" type="MarginContainer"]
 custom_minimum_size = Vector2(300, 150)

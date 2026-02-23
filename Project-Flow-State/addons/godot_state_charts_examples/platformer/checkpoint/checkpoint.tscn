@@ -1,15 +1,15 @@
 [gd_scene load_steps=19 format=3 uid="uid://b22lg10c7wxrq"]
 
 [ext_resource type="Texture2D" uid="uid://4nlen5j7etvq" path="res://addons/godot_state_charts_examples/platformer/checkpoint/checkpoint_no_flag.png" id="1_7vf2w"]
-[ext_resource type="Script" path="res://addons/godot_state_charts_examples/platformer/checkpoint/checkpoint.gd" id="1_jot5v"]
+[ext_resource type="Script" uid="uid://ccsukp7vuknqs" path="res://addons/godot_state_charts_examples/platformer/checkpoint/checkpoint.gd" id="1_jot5v"]
 [ext_resource type="Texture2D" uid="uid://dfju87f6rw0nm" path="res://addons/godot_state_charts_examples/platformer/checkpoint/checkpoint_idle.png" id="2_ns71f"]
 [ext_resource type="Texture2D" uid="uid://beoe1hh5aggor" path="res://addons/godot_state_charts_examples/platformer/checkpoint/checkpoint_flag_out.png" id="3_fbg27"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_a58ma"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="6_53g38"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_qkwqk"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_a74k1"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_7tjvh"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="10_fk2fi"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="5_a58ma"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="6_53g38"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_qkwqk"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_a74k1"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_7tjvh"]
+[ext_resource type="Script" uid="uid://bambbrd2wupx0" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="10_fk2fi"]
 
 [sub_resource type="Animation" id="Animation_xvggk"]
 length = 0.001

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d13u8a0s44d1h"]
 
-[ext_resource type="Script" path="res://Scripts/reticle_draw.gd" id="1_7dkfn"]
+[ext_resource type="Script" uid="uid://dwihj52htnkrg" path="res://Assets/scripts/player/reticle_draw.gd" id="1_7dkfn"]
 
 [node name="UserInterface" type="CanvasLayer"]
 follow_viewport_enabled = true

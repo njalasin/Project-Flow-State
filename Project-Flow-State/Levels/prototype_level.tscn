@@ -1,4 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1qoup72pqbbk"]
+[gd_scene load_steps=11 format=3 uid="uid://c1qoup72pqbbk"]
+
+[ext_resource type="PackedScene" uid="uid://c6x1jxr7cx4a8" path="res://Scenes/player.tscn" id="1_iac22"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8xkh"]
 albedo_color = Color(0.252028, 0.252028, 0.252028, 1)
@@ -19,13 +21,6 @@ material = SubResource("StandardMaterial3D_bdca0")
 [sub_resource type="BoxShape3D" id="BoxShape3D_doff3"]
 size = Vector3(2, 0.2, 2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xtmp"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_00lq7"]
-material = SubResource("StandardMaterial3D_3xtmp")
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fiqos"]
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yytuu"]
 
 [sub_resource type="Sky" id="Sky_to0tq"]
@@ -37,6 +32,9 @@ background_color = Color(0.581033, 0.581033, 0.581033, 1)
 sky = SubResource("Sky_to0tq")
 
 [node name="PrototypeLevel" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_iac22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Geometry" type="Node3D" parent="."]
 
@@ -63,16 +61,6 @@ mesh = SubResource("BoxMesh_py3ln")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Platform"]
 shape = SubResource("BoxShape3D_doff3")
-
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_mask = 11
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-mesh = SubResource("CapsuleMesh_00lq7")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_fiqos")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_gb5i8")

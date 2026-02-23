@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" load_steps=4 format=3 uid="uid://clokrco60m1fv"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_2vvvl"]
+[ext_resource type="Script" uid="uid://ldfqjtq0br35" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="2_6opar"]
+[ext_resource type="PackedScene" uid="uid://th7aor2pshe4" path="res://Scenes/lamp.tscn" id="2_t1w26"]
+
+[resource]
+script = ExtResource("2_6opar")
+target_map_editor = 1
+scene_file = ExtResource("2_t1w26")
+classname = "light_lamp"
+description = "I love lamp"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0.8, 0.8, 1),
+"model": "{\"path\": \"Trenchbroom/models/light_lamp.glb\", \"scale\": 32.0 }",
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})
+metadata/_custom_type_script = "uid://ldfqjtq0br35"

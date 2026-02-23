@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d2w4230hbr7y8"]
+
+[ext_resource type="Texture2D" uid="uid://dnutjf2bo5oke" path="res://Trenchbroom/textures/Vent-004_Base-001.png" id="1_03mt2"]
+
+[resource]
+albedo_texture = ExtResource("1_03mt2")
+metallic_specular = 0.0
+texture_filter = 2

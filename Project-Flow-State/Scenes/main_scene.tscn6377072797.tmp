@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4l7k1b8c4gai"]
+
+[ext_resource type="Script" uid="uid://6ecxlxe185we" path="res://Assets/scripts/system/game_manager.gd" id="1_ase3e"]
+[ext_resource type="PackedScene" uid="uid://hwq2sprxj3yw" path="res://Levels/trenchbroom_prototype.tscn" id="2_6l7je"]
+[ext_resource type="Script" uid="uid://c6pspixe41ebj" path="res://Assets/scripts/system/weapon_manager.gd" id="2_jv6wh"]
+[ext_resource type="Script" uid="uid://c2ksc6v681als" path="res://Assets/weapons/scripts/weapon_data.gd" id="3_iacmt"]
+[ext_resource type="Resource" uid="uid://dwfquaassvega" path="res://Assets/weapons/resources/rifle_data.tres" id="4_6ev3c"]
+[ext_resource type="Resource" uid="uid://8iv6o5f8jo8u" path="res://Assets/weapons/resources/laser_gauntlet_data.tres" id="5_6ev3c"]
+[ext_resource type="PackedScene" uid="uid://c6x1jxr7cx4a8" path="res://Assets/weapons/player.tscn" id="7_maf8m"]
+
+[node name="MainScene" type="Node"]
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("1_ase3e")
+
+[node name="WeaponManager" type="Node" parent="Managers" node_paths=PackedStringArray("player")]
+script = ExtResource("2_jv6wh")
+weapons = Dictionary[int, ExtResource("3_iacmt")]({
+1: ExtResource("4_6ev3c"),
+2: ExtResource("5_6ev3c")
+})
+player = NodePath("../../CurrentLevel/Player")
+
+[node name="CurrentLevel" type="Node3D" parent="."]
+
+[node name="TrenchbroomPrototype" parent="CurrentLevel" instance=ExtResource("2_6l7je")]
+
+[node name="Player" parent="CurrentLevel" groups=["player"] instance=ExtResource("7_maf8m")]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dujdx4h87a7vx"]
+
+[ext_resource type="PackedScene" uid="uid://wrsint1fpha3" path="res://Scenes/projectile.tscn" id="1_o5to1"]
+[ext_resource type="Script" uid="uid://ct5rrklmoi04u" path="res://Assets/scripts/weapons/weapon.gd" id="2_o5to1"]
+[ext_resource type="PackedScene" uid="uid://dhrigchqlt8u1" path="res://Scenes/laser_gauntlet.tscn" id="2_wxsme"]
+
+[resource]
+script = ExtResource("2_o5to1")
+weapon_name = "laser_gauntlet"
+damage = 1.0
+fire_rate = 30.0
+is_automatic = true
+weapon_model = ExtResource("2_wxsme")
+projectile_scene = ExtResource("1_o5to1")
+metadata/_custom_type_script = "uid://ct5rrklmoi04u"

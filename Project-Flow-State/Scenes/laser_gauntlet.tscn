@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhrigchqlt8u1"]
+
+[ext_resource type="PackedScene" uid="uid://bieokoydwidpq" path="res://Assets/models/weapons/Lazer_Gauntlet.blend" id="1_jytx1"]
+
+[node name="laser_gauntlet" type="Node3D"]
+
+[node name="Lazer_Gauntlet" parent="." instance=ExtResource("1_jytx1")]
+transform = Transform3D(-4.371139e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.371139e-09, 0, 0, -0.2)
