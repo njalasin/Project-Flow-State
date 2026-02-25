@@ -7,15 +7,19 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	
 	get_tree().create_timer(3.0).timeout.connect(queue_free)
+
 func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
+
 func setup(vel: Vector3, dmg: float) -> void:
 	velocity = vel
 	damage = dmg
+
 func _on_body_entered(body: Node3D) -> void:
 	print("Projectile hit: ", body.name, " at ", global_position)
 	_spawn_impact_marker(global_position)
 	queue_free()
+
 func _spawn_impact_marker(position: Vector3) -> void:
 	var marker = MeshInstance3D.new()
 	var box = BoxMesh.new()

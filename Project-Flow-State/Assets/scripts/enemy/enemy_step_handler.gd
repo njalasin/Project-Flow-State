@@ -22,11 +22,13 @@ func handle_step_climbing():
 				enemy_controller.global_position.y += measured_height
 				enemy_controller.velocity = enemy_controller.previous_velocity
 			break
+
 func _is_vertical_surface(collision: KinematicCollision3D) -> bool:
 	var normal = collision.get_normal()
 	if abs(normal.y) <= surface_threshold:
 		return true
 	return _check_collision_surface(collision)
+
 func _check_collision_surface(collision: KinematicCollision3D) -> bool:
 	var space_state = enemy_controller.get_world_3d().direct_space_state
 	var collision_point = collision.get_position()
@@ -42,6 +44,7 @@ func _check_collision_surface(collision: KinematicCollision3D) -> bool:
 	if result and abs(result.normal.y) <= surface_threshold:
 		return true
 	return false
+
 func _get_enemy_feet_position() -> Vector3:
 	var feet_pos = enemy_controller.global_position
 	if enemy_controller.standing_collision.shape.is_class("CapsuleShape3D"):
@@ -50,6 +53,7 @@ func _get_enemy_feet_position() -> Vector3:
 		feet_pos.y -= enemy_controller.standing_collision.shape.radius * -.1
 	feet_pos.y += FEET_ADJUSTED_HEIGHT # small buffer
 	return feet_pos
+
 func _measure_step_height(collision: KinematicCollision3D) -> float:
 	var space_state = enemy_controller.get_world_3d().direct_space_state
 	var collision_point = collision.get_position()
@@ -72,6 +76,7 @@ func _measure_step_height(collision: KinematicCollision3D) -> float:
 		return result.position.y - enemy_feet.y
 		
 	return 0.0
+
 func _is_valid_step_direction(collision: KinematicCollision3D) -> bool:
 	var collision_normal = collision.get_normal()
 	var movement_dir = enemy_controller.get_direction()

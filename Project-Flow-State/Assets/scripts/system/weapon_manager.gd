@@ -32,17 +32,26 @@ func switch_to_slot(slot: int) -> void:
 		current_slot = slot
 		player.weapon_controller.switch_weapon(weapon_data)
 	max_ammo = weapons[current_slot].max_ammo
+
 func use_ammo(slot: int , amount: int = 1) -> void:
 	if slot in weapons:
 		weapons[slot].ammo = max(0, weapons[slot].ammo - amount)
+
 func reload(slot: int) -> void:
 	if slot in weapons:
 		weapons[slot].ammo = max_ammo
+
 func get_current_ammo() -> int:
 		return weapons[current_slot].ammo
+
 func initialize_starting_weapon() -> void:
 	# Find first unlocked weapon
 	for slot in range(1, 10):
 		if weapons.has(slot) and weapons[slot].unlocked:
 			switch_to_slot(slot)
 			return
+
+func unlock_weapon(slot: int, weapon: Weapon) -> void:
+	weapons[slot].weapon = weapon
+	weapons[slot].unlocked = true
+	weapons[slot].ammo = weapons[slot].max_ammo

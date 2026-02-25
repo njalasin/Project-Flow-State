@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://db4k68ti3w0n1"]
+
+[ext_resource type="PackedScene" uid="uid://cavpln2ver17v" path="res://Scenes/base_pickup.tscn" id="1_suvf0"]
+[ext_resource type="Script" uid="uid://lkp4hnl47xb8" path="res://Assets/scripts/environment/pickups/ammo_pickup.gd" id="2_d3c0c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suvf0"]
+albedo_color = Color(0.16078432, 0.5294118, 0, 1)
+metallic = 1.0
+metallic_specular = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_d3c0c"]
+material = SubResource("StandardMaterial3D_suvf0")
+size = Vector3(0.5, 0.5, 0.75)
+
+[node name="AmmoPickup" instance=ExtResource("1_suvf0")]
+script = ExtResource("2_d3c0c")
+ammo_amount = 10
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("BoxMesh_d3c0c")

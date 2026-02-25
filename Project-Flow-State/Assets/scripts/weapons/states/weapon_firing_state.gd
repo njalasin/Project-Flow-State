@@ -7,7 +7,7 @@ func _on_firing_state_entered() -> void:
 	
 	# Since we're in firing state, fire on state entry
 	weapon_controller.fire_weapon()
-	
+
 func _on_firing_state_physics_processing(delta: float) -> void:
 	if not weapon_controller:
 		return

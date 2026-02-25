@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://hwq2sprxj3yw"]
+[gd_scene load_steps=44 format=4 uid="uid://hwq2sprxj3yw"]
 
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_4gt2m"]
 [ext_resource type="Script" uid="uid://coi8bjc4w6gty" path="res://Assets/scripts/environment/level.gd" id="1_bfkxj"]
@@ -13,6 +13,8 @@
 [ext_resource type="Material" uid="uid://cxc7he8f4hclq" path="res://Trenchbroom/textures/Grid-001-10_Base-001.tres" id="9_mtfol"]
 [ext_resource type="PackedScene" uid="uid://bkd8qn5xwd64" path="res://Scenes/grunt.tscn" id="13_2byla"]
 [ext_resource type="PackedScene" uid="uid://cv5smctfidvwg" path="res://Scenes/roller.tscn" id="14_mtfol"]
+[ext_resource type="PackedScene" uid="uid://246di48c07xr" path="res://Scenes/laser_gauntlet_pickup.tscn" id="14_o7nxq"]
+[ext_resource type="PackedScene" uid="uid://db4k68ti3w0n1" path="res://Scenes/ammo_pickup.tscn" id="15_o7nxq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6ydcu"]
 
@@ -301,3 +303,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.020308, 4.0000005, 18.617
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.307915, 3.9999995, 18.276127)
 
 [node name="Target" type="CharacterBody3D" parent="."]
+
+[node name="BasePickup" parent="." instance=ExtResource("14_o7nxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4749908, 0.738945, -11.703933)
+
+[node name="AmmoPickup" parent="." instance=ExtResource("15_o7nxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.053271, 4.25, -23.654566)
+
+[node name="AmmoPickup2" parent="." instance=ExtResource("15_o7nxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.935738, 3.2499995, -6.4718437)
+
+[node name="AmmoPickup3" parent="." instance=ExtResource("15_o7nxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0849657, 3.249999, 22.115345)

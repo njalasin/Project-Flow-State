@@ -13,13 +13,13 @@ func _func_godot_apply_properties(entity_properties: Dictionary) -> void:
 	move_distance = entity_properties["move_distance"] as float
 	move_time = entity_properties["move_time"] as float
 	move_direction = entity_properties["move_direction"] as Vector3
-	
+
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		start_position = global_position
 		end_position = start_position + (move_direction.normalized() * move_distance)
 		start_movement()
-		
+
 func start_movement() -> void:
 	platform_tween = create_tween()
 	platform_tween.set_loops()

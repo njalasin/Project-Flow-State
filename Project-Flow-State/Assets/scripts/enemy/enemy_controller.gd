@@ -16,6 +16,7 @@ var previous_velocity : Vector3 = Vector3.ZERO
 
 func _process(delta) -> void:
 	pass
+
 func _physics_process(delta) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -32,7 +33,9 @@ func _physics_process(delta) -> void:
 	
 	velocity = velocity.move_toward(new_velocity,0.25)
 	move_and_slide()
+
 func target_position(target) -> void:
 	nav.target_position = target
+
 func get_direction() -> Vector3:
 	return movement_direction

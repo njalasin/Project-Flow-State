@@ -2,9 +2,12 @@ extends WeaponState
 
 func _on_empty_state_entered() -> void:
 	print("Weapon empty")
-	
+
 func _on_empty_state_processing(delta: float) -> void:
-	
+	if Managers.weapon_manager.get_current_ammo() > 0:
+		print("Reloaded: ", Managers.weapon_manager.get_current_ammo(), " bullets")
+		weapon_controller.weapon_state_chart.send_event("onIdle")
+		
 	# Reload while weapon is empty
 	if Input.is_action_just_pressed("reload"):
 		Managers.weapon_manager.reload(Managers.weapon_manager.current_slot)

@@ -13,11 +13,13 @@ var current_weapon : Weapon
 func _ready() -> void:
 	if current_weapon:
 		spawn_weapon_model()
+
 func _process(delta: float) -> void:
 	if fire_rate_timer > 0:
 		fire_rate_timer -= delta
 		if fire_rate_timer <= 0:
 			can_fire_next = true
+
 func spawn_weapon_model() -> void:
 	if current_weapon_model:
 		current_weapon_model.queue_free()
@@ -26,9 +28,11 @@ func spawn_weapon_model() -> void:
 		current_weapon_model = current_weapon.weapon_model.instantiate()
 		weapon_model_parent.add_child(current_weapon_model)
 		current_weapon_model.position = current_weapon.weapon_position
+
 func can_fire() -> bool:
 	var weapon_data = Managers.weapon_manager.weapons[Managers.weapon_manager.current_slot]
 	return weapon_data.ammo > 0 and can_fire_next
+
 func fire_weapon() -> void:
 	if can_fire():
 		Managers.weapon_manager.use_ammo(Managers.weapon_manager.current_slot)
@@ -42,6 +46,7 @@ func fire_weapon() -> void:
 			_perform_hitscan()
 		else:
 			_spawn_projectile()
+
 func _perform_hitscan() -> void:
 	if not camera:
 		print("No camera assigned!")
@@ -67,6 +72,7 @@ func _perform_hitscan() -> void:
 		if result:
 			print("Hit: ", result.collider.name, " at ", result.position)
 			_spawn_impact_marker(result.position)
+
 func _spawn_impact_marker(position: Vector3) -> void:
 	var marker = MeshInstance3D.new()
 	var box = BoxMesh.new()
@@ -81,6 +87,7 @@ func _spawn_impact_marker(position: Vector3) -> void:
 	marker.global_position = position
 	
 	get_tree().create_timer(2.0).timeout.connect(marker.queue_free)
+
 func _spawn_projectile() -> void:
 	if not current_weapon.projectile_scene:
 		print("No projectile assigned!")
@@ -108,6 +115,7 @@ func _spawn_projectile() -> void:
 	projectile.look_at(projectile.global_position + direction, Vector3.UP)
 	# Setup the projectile
 	projectile.setup(velocity, current_weapon.damage)
+
 func switch_weapon(weapon_data: WeaponData) -> void:
 	current_weapon = weapon_data.weapon
 	
@@ -117,6 +125,7 @@ func switch_weapon(weapon_data: WeaponData) -> void:
 	spawn_weapon_model()
 	
 	weapon_state_chart.send_event("onIdle")
+
 func has_ammo() -> bool:
 	var weapon_data = Managers.weapon_manager.weapons[Managers.weapon_manager.current_slot]
 	return weapon_data.ammo > 0

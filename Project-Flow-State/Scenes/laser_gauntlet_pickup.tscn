@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://246di48c07xr"]
+
+[ext_resource type="PackedScene" uid="uid://cavpln2ver17v" path="res://Scenes/base_pickup.tscn" id="1_chndr"]
+[ext_resource type="PackedScene" uid="uid://bieokoydwidpq" path="res://Assets/models/weapons/Lazer_Gauntlet.blend" id="2_nvgp1"]
+[ext_resource type="Script" uid="uid://dllmwxkr5fjne" path="res://Assets/scripts/environment/pickups/weapon_pickup.gd" id="2_wiwp5"]
+[ext_resource type="Resource" uid="uid://dujdx4h87a7vx" path="res://Assets/weapons/resources/laser_gauntlet.tres" id="3_p5ds7"]
+
+[node name="LaserGauntletPickup" instance=ExtResource("1_chndr")]
+script = ExtResource("2_wiwp5")
+slot = 2
+weapon_resource = ExtResource("3_p5ds7")
+
+[node name="Lazer_Gauntlet" parent="." index="1" instance=ExtResource("2_nvgp1")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
