@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c6x1jxr7cx4a8"]
+[gd_scene format=3 uid="uid://c6x1jxr7cx4a8"]
 
 [ext_resource type="Script" uid="uid://bi5nxp5gix7e" path="res://Assets/scripts/player/player_controller.gd" id="1_gxj8c"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_bxl2m"]
@@ -40,8 +40,9 @@ material = SubResource("StandardMaterial3D_cofru")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6w7nj"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "camera_effects", "weapon_controller", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast", "step_handler") groups=["Player"]]
-collision_mask = 10
+[node name="Player" type="CharacterBody3D" unique_id=1962597566 node_paths=PackedStringArray("camera", "camera_effects", "weapon_controller", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast", "step_handler") groups=["Player"]]
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_gxj8c")
 camera = NodePath("CameraController")
 camera_effects = NodePath("CameraController/Camera3D")
@@ -53,7 +54,7 @@ crouch_check = NodePath("CrouchCheck")
 interaction_raycast = NodePath("CameraController/Camera3D/InteractionRay")
 step_handler = NodePath("Components/StepHandler")
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("2_bxl2m")]
+[node name="StateChartDebugger" parent="." unique_id=1335814173 instance=ExtResource("2_bxl2m")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -63,232 +64,234 @@ grow_horizontal = 1
 grow_vertical = 1
 initial_node_to_watch = NodePath("../StateChart")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=730602495]
 mesh = SubResource("CapsuleMesh_vw68u")
 
-[node name="StandingCollision" type="CollisionShape3D" parent="."]
+[node name="StandingCollision" type="CollisionShape3D" parent="." unique_id=18623604]
 shape = SubResource("CapsuleShape3D_ck6ss")
 
-[node name="CrouchingCollision" type="CollisionShape3D" parent="."]
+[node name="CrouchingCollision" type="CollisionShape3D" parent="." unique_id=30080685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("SphereShape3D_8kplo")
 disabled = true
 
-[node name="CrouchCheck" type="ShapeCast3D" parent="."]
+[node name="CrouchCheck" type="ShapeCast3D" parent="." unique_id=231478858]
 shape = SubResource("SphereShape3D_6w7nj")
 target_position = Vector3(0, 0.5, 0)
 collision_mask = 2
 
-[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("player_controller", "component_mouse_capture")]
+[node name="CameraController" type="Node3D" parent="." unique_id=2742958 node_paths=PackedStringArray("player_controller", "component_mouse_capture")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("3_dnpff")
 player_controller = NodePath("..")
 component_mouse_capture = NodePath("../Components/MouseCapture")
+tilt_lower_limit = -75
+tilt_upper_limit = 75
 
-[node name="Camera3D" type="Camera3D" parent="CameraController" node_paths=PackedStringArray("player_controller")]
+[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=1016000371 node_paths=PackedStringArray("player_controller")]
 script = ExtResource("4_0ltgq")
 player_controller = NodePath("../..")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera3D"]
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera3D" unique_id=123867212]
 update_mode = 1
 
-[node name="InteractionRay" type="RayCast3D" parent="CameraController/Camera3D"]
+[node name="InteractionRay" type="RayCast3D" parent="CameraController/Camera3D" unique_id=369215101]
 transform = Transform3D(1, 0, 0, 0, -1.31134e-07, -1, 0, 3, -4.37114e-08, 0, 0, 0)
 collision_mask = 13
 collide_with_areas = true
 script = ExtResource("4_4w6w0")
 
-[node name="Components" type="Node" parent="."]
+[node name="Components" type="Node" parent="." unique_id=120601864]
 
-[node name="MouseCapture" type="Node" parent="Components"]
+[node name="MouseCapture" type="Node" parent="Components" unique_id=943322799]
 script = ExtResource("6_15m08")
 
-[node name="StepHandler" type="Node" parent="Components" node_paths=PackedStringArray("player_controller")]
+[node name="StepHandler" type="Node" parent="Components" unique_id=603106604 node_paths=PackedStringArray("player_controller")]
 script = ExtResource("7_umkhq")
 player_controller = NodePath("../..")
 
-[node name="WeaponController" type="Node" parent="Components" node_paths=PackedStringArray("camera", "weapon_model_parent", "weapon_state_chart")]
+[node name="WeaponController" type="Node" parent="Components" unique_id=2122962081 node_paths=PackedStringArray("camera", "weapon_model_parent", "weapon_state_chart")]
 script = ExtResource("8_bi64h")
 camera = NodePath("../../CameraController/Camera3D")
 weapon_model_parent = NodePath("../../CameraController/Camera3D")
 weapon_state_chart = NodePath("../../WeaponStateChart")
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=1373170736]
 script = ExtResource("4_imt0v")
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=1575547427]
 script = ExtResource("5_7w6uh")
 
-[node name="Movement" type="Node" parent="StateChart/Root"]
+[node name="Movement" type="Node" parent="StateChart/Root" unique_id=1630258187]
 script = ExtResource("6_u6s1a")
 initial_state = NodePath("Grounded")
 
-[node name="Grounded" type="Node" parent="StateChart/Root/Movement"]
+[node name="Grounded" type="Node" parent="StateChart/Root/Movement" unique_id=1532770029]
 script = ExtResource("6_u6s1a")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root/Movement/Grounded"]
+[node name="Idle" type="Node" parent="StateChart/Root/Movement/Grounded" unique_id=430884340]
 script = ExtResource("7_na1oa")
 
-[node name="OnMoving" type="Node" parent="StateChart/Root/Movement/Grounded/Idle"]
+[node name="OnMoving" type="Node" parent="StateChart/Root/Movement/Grounded/Idle" unique_id=1268551552]
 script = ExtResource("8_6wvqr")
 to = NodePath("../../Moving")
 event = &"onMoving"
 delay_in_seconds = "0.0"
 
-[node name="Moving" type="Node" parent="StateChart/Root/Movement/Grounded"]
+[node name="Moving" type="Node" parent="StateChart/Root/Movement/Grounded" unique_id=1553109488]
 script = ExtResource("6_u6s1a")
 initial_state = NodePath("Walking")
 
-[node name="Walking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving"]
+[node name="Walking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=380207421]
 script = ExtResource("7_na1oa")
 
-[node name="Sprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving"]
+[node name="Sprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1304574887]
 script = ExtResource("7_na1oa")
 
-[node name="OnIdle" type="Node" parent="StateChart/Root/Movement/Grounded/Moving"]
+[node name="OnIdle" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=2106281019]
 script = ExtResource("8_6wvqr")
 to = NodePath("../../Idle")
 event = &"onIdle"
 delay_in_seconds = "0.0"
 
-[node name="OnWalking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving"]
+[node name="OnWalking" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=2122503160]
 script = ExtResource("8_6wvqr")
 to = NodePath("../Walking")
 event = &"onWalking"
 delay_in_seconds = "0.0"
 
-[node name="OnSprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving"]
+[node name="OnSprinting" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1837390977]
 script = ExtResource("8_6wvqr")
 to = NodePath("../Sprinting")
 event = &"onSprinting"
 delay_in_seconds = "0.0"
 
-[node name="OnAirborne" type="Node" parent="StateChart/Root/Movement/Grounded/Moving"]
+[node name="OnAirborne" type="Node" parent="StateChart/Root/Movement/Grounded/Moving" unique_id=1772035385]
 script = ExtResource("8_6wvqr")
 to = NodePath("../../../Airborne")
 event = &"onAirborne"
 delay_in_seconds = "0.0"
 
-[node name="Airborne" type="Node" parent="StateChart/Root/Movement"]
+[node name="Airborne" type="Node" parent="StateChart/Root/Movement" unique_id=127112095]
 script = ExtResource("6_u6s1a")
 initial_state = NodePath("Jumping")
 
-[node name="Jumping" type="Node" parent="StateChart/Root/Movement/Airborne"]
+[node name="Jumping" type="Node" parent="StateChart/Root/Movement/Airborne" unique_id=230838734]
 script = ExtResource("7_na1oa")
 
-[node name="Falling" type="Node" parent="StateChart/Root/Movement/Airborne"]
+[node name="Falling" type="Node" parent="StateChart/Root/Movement/Airborne" unique_id=1777332295]
 script = ExtResource("7_na1oa")
 
-[node name="OnGrounded" type="Node" parent="StateChart/Root/Movement/Airborne"]
+[node name="OnGrounded" type="Node" parent="StateChart/Root/Movement/Airborne" unique_id=242692367]
 script = ExtResource("8_6wvqr")
 to = NodePath("../../Grounded")
 event = &"onGrounded"
 delay_in_seconds = "0.0"
 
-[node name="Posture" type="Node" parent="StateChart/Root"]
+[node name="Posture" type="Node" parent="StateChart/Root" unique_id=2068162069]
 script = ExtResource("6_u6s1a")
 initial_state = NodePath("Standing")
 
-[node name="Standing" type="Node" parent="StateChart/Root/Posture"]
+[node name="Standing" type="Node" parent="StateChart/Root/Posture" unique_id=357416828]
 script = ExtResource("7_na1oa")
 
-[node name="Crouching" type="Node" parent="StateChart/Root/Posture"]
+[node name="Crouching" type="Node" parent="StateChart/Root/Posture" unique_id=1319585897]
 script = ExtResource("7_na1oa")
 
-[node name="OnStanding" type="Node" parent="StateChart/Root/Posture"]
+[node name="OnStanding" type="Node" parent="StateChart/Root/Posture" unique_id=214161359]
 script = ExtResource("8_6wvqr")
 to = NodePath("../Standing")
 event = &"onStanding"
 delay_in_seconds = "0.0"
 
-[node name="OnCrouching" type="Node" parent="StateChart/Root/Posture"]
+[node name="OnCrouching" type="Node" parent="StateChart/Root/Posture" unique_id=1421493376]
 script = ExtResource("8_6wvqr")
 to = NodePath("../Crouching")
 event = &"onCrouching"
 delay_in_seconds = "0.0"
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("player_controller", "step_handler_component")]
+[node name="StateMachine" type="Node" parent="." unique_id=66129595 node_paths=PackedStringArray("player_controller", "step_handler_component")]
 unique_name_in_owner = true
 script = ExtResource("9_ki6k6")
 player_controller = NodePath("..")
 step_handler_component = NodePath("../Components/StepHandler")
 
-[node name="MovementState" type="Node" parent="StateMachine"]
+[node name="MovementState" type="Node" parent="StateMachine" unique_id=314386205]
 
-[node name="GroundedState" type="Node" parent="StateMachine/MovementState"]
+[node name="GroundedState" type="Node" parent="StateMachine/MovementState" unique_id=1625048421]
 script = ExtResource("11_smtfk")
 
-[node name="IdleState" type="Node" parent="StateMachine/MovementState/GroundedState"]
+[node name="IdleState" type="Node" parent="StateMachine/MovementState/GroundedState" unique_id=669274300]
 script = ExtResource("10_pksbh")
 
-[node name="MovingState" type="Node" parent="StateMachine/MovementState/GroundedState"]
+[node name="MovingState" type="Node" parent="StateMachine/MovementState/GroundedState" unique_id=341469788]
 script = ExtResource("12_vu2nc")
 
-[node name="WalkingState" type="Node" parent="StateMachine/MovementState/GroundedState/MovingState"]
+[node name="WalkingState" type="Node" parent="StateMachine/MovementState/GroundedState/MovingState" unique_id=972105611]
 script = ExtResource("13_udh1u")
 
-[node name="SprintingState" type="Node" parent="StateMachine/MovementState/GroundedState/MovingState"]
+[node name="SprintingState" type="Node" parent="StateMachine/MovementState/GroundedState/MovingState" unique_id=1719923252]
 script = ExtResource("14_pfhdn")
 
-[node name="AirborneState" type="Node" parent="StateMachine/MovementState"]
+[node name="AirborneState" type="Node" parent="StateMachine/MovementState" unique_id=2118281093]
 script = ExtResource("16_spdfn")
 
-[node name="PostureState" type="Node" parent="StateMachine"]
+[node name="PostureState" type="Node" parent="StateMachine" unique_id=2127034959]
 
-[node name="StandingState" type="Node" parent="StateMachine/PostureState"]
+[node name="StandingState" type="Node" parent="StateMachine/PostureState" unique_id=159565640]
 script = ExtResource("15_7kavu")
 
-[node name="CrouchingState" type="Node" parent="StateMachine/PostureState"]
+[node name="CrouchingState" type="Node" parent="StateMachine/PostureState" unique_id=649114851]
 script = ExtResource("16_mt68l")
 
-[node name="WeaponStateChart" type="Node" parent="."]
+[node name="WeaponStateChart" type="Node" parent="." unique_id=727149837]
 script = ExtResource("4_imt0v")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
-[node name="Root" type="Node" parent="WeaponStateChart"]
+[node name="Root" type="Node" parent="WeaponStateChart" unique_id=2031605523]
 script = ExtResource("6_u6s1a")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="WeaponStateChart/Root"]
+[node name="IdleState" type="Node" parent="WeaponStateChart/Root" unique_id=1906061445]
 script = ExtResource("7_na1oa")
 
-[node name="FiringState" type="Node" parent="WeaponStateChart/Root"]
+[node name="FiringState" type="Node" parent="WeaponStateChart/Root" unique_id=1171161933]
 script = ExtResource("7_na1oa")
 
-[node name="EmptyState" type="Node" parent="WeaponStateChart/Root"]
+[node name="EmptyState" type="Node" parent="WeaponStateChart/Root" unique_id=1650717477]
 script = ExtResource("7_na1oa")
 
-[node name="onIdle" type="Node" parent="WeaponStateChart/Root"]
+[node name="onIdle" type="Node" parent="WeaponStateChart/Root" unique_id=1826941902]
 script = ExtResource("8_6wvqr")
 to = NodePath("../IdleState")
 event = &"onIdle"
 delay_in_seconds = "0.0"
 
-[node name="onFiring" type="Node" parent="WeaponStateChart/Root"]
+[node name="onFiring" type="Node" parent="WeaponStateChart/Root" unique_id=898821969]
 script = ExtResource("8_6wvqr")
 to = NodePath("../FiringState")
 event = &"onFiring"
 delay_in_seconds = "0.0"
 
-[node name="onEmpty" type="Node" parent="WeaponStateChart/Root"]
+[node name="onEmpty" type="Node" parent="WeaponStateChart/Root" unique_id=999276912]
 script = ExtResource("8_6wvqr")
 to = NodePath("../EmptyState")
 event = &"onEmpty"
 delay_in_seconds = "0.0"
 
-[node name="WeaponStateMachine" type="Node" parent="." node_paths=PackedStringArray("weapon_controller")]
+[node name="WeaponStateMachine" type="Node" parent="." unique_id=1592930177 node_paths=PackedStringArray("weapon_controller")]
 unique_name_in_owner = true
 script = ExtResource("24_vfarp")
 weapon_controller = NodePath("../Components/WeaponController")
 
-[node name="IdleState" type="Node" parent="WeaponStateMachine"]
+[node name="IdleState" type="Node" parent="WeaponStateMachine" unique_id=186711361]
 script = ExtResource("25_y6uwr")
 
-[node name="FiringState" type="Node" parent="WeaponStateMachine"]
+[node name="FiringState" type="Node" parent="WeaponStateMachine" unique_id=968393725]
 script = ExtResource("26_83xs0")
 
-[node name="EmptyState" type="Node" parent="WeaponStateMachine"]
+[node name="EmptyState" type="Node" parent="WeaponStateMachine" unique_id=2067653462]
 script = ExtResource("27_ypfnu")
 
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateMachine/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]

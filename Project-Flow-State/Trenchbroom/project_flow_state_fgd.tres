@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=6 format=3 uid="uid://c73rmy2xx21cv"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" format=3 uid="uid://c73rmy2xx21cv"]
 
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_oek0y"]
 [ext_resource type="Script" uid="uid://drlmgulwbjwqu" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="2_3c52d"]
 [ext_resource type="Resource" uid="uid://wdtd8py8ldhw" path="res://Trenchbroom/fgd/solid/func_moving_platform.tres" id="2_c8q0x"]
 [ext_resource type="Resource" uid="uid://djatn3p6p6ogp" path="res://Trenchbroom/fgd/point/func_light.tres" id="3_c8q0x"]
 [ext_resource type="Resource" uid="uid://clokrco60m1fv" path="res://Trenchbroom/fgd/model_point/light_lamp.tres" id="4_ngwos"]
+[ext_resource type="Resource" uid="uid://fx2oxmepj4m7" path="res://Trenchbroom/fgd/model_point/pickup_ammo_box.tres" id="5_u0y3e"]
+[ext_resource type="Resource" uid="uid://b1vqf8172cyry" path="res://Trenchbroom/fgd/model_point/pickup_weapon_laser_gauntlet.tres" id="6_yj5rm"]
 
 [resource]
 script = ExtResource("2_3c52d")
 fgd_name = "Project_Flow_State"
 base_fgd_files = Array[Resource]([ExtResource("1_oek0y")])
-entity_definitions = Array[Resource]([ExtResource("2_c8q0x"), ExtResource("3_c8q0x"), ExtResource("4_ngwos")])
+entity_definitions = Array[Resource]([ExtResource("2_c8q0x"), ExtResource("3_c8q0x"), ExtResource("4_ngwos"), ExtResource("5_u0y3e"), ExtResource("6_yj5rm")])
 metadata/_custom_type_script = "uid://drlmgulwbjwqu"

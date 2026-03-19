@@ -217,3 +217,8 @@
 "classname" "func_light"
 "origin" "184 40 56"
 }
+// entity 3
+{
+"classname" "pickup_laser_gauntlet"
+"origin" "-432 -224 49"
+}

@@ -99,8 +99,8 @@ func _spawn_projectile() -> void:
 	var projectile = current_weapon.projectile_scene.instantiate() as Projectile
 	get_tree().current_scene.add_child(projectile)
 	
-	# Position at camera
-	projectile.global_position = camera.global_position
+	# Position at firing point
+	projectile.global_position = weapon_model_parent.global_position
 	
 	# Calculate accuracy spread
 	var accuracy_spread = (100 - current_weapon.accuracy) / 1000.0

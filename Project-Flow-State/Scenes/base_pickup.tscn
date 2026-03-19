@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cavpln2ver17v"]
+[gd_scene format=3 uid="uid://cavpln2ver17v"]
 
 [ext_resource type="Script" uid="uid://dr1qt6v78l2l7" path="res://Assets/scripts/environment/pickups/base_pickup.gd" id="1_plhke"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5dgnw"]
 
-[node name="BasePickup" type="Area3D"]
+[node name="BasePickup" type="Area3D" unique_id=1565346213]
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_plhke")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=343195906]
 shape = SubResource("SphereShape3D_5dgnw")

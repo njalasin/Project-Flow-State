@@ -64,7 +64,7 @@ func calculate_view_offset(delta):
 		_step_timer = fmod(_step_timer, 1.0)
 	else:
 		_step_timer = 0.0
-	var bob_sin = sin(_step_timer * 2.0 * PI) * 0.5 # 0.5 Reduces the magnitude of the sine wave, i.e. less movement
+	var bob_sin = sin(_step_timer * 2.0 * PI) * 1.0 # 1.0 Reduces the magnitude of the sine wave, i.e. less movement
 	var angles = Vector3.ZERO
 	var offset = Vector3.ZERO
 	

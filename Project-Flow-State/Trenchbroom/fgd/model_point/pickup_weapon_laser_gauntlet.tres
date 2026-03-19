@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" format=3 uid="uid://b1vqf8172cyry"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_d2cg5"]
+[ext_resource type="PackedScene" uid="uid://c0kg2pdrt2ub" path="res://Scenes/Trenchbroom/Pickups/pickup_laser_gauntlet.tscn" id="2_3vuq3"]
+[ext_resource type="Script" uid="uid://ldfqjtq0br35" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="2_5gr1i"]
+
+[resource]
+script = ExtResource("2_5gr1i")
+target_map_editor = 1
+generate_size_property = true
+scene_file = ExtResource("2_3vuq3")
+classname = "pickup_laser_gauntlet"
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.8, 0.8, 0.8, 1),
+"model": "{\"path\": \"Trenchbroom/models/pickup_laser_gauntlet.glb\", \"scale\": 32.0 }",
+"size": AABB(-32, -32, -33, 32, 32, 31)
+})
+metadata/_custom_type_script = "uid://ldfqjtq0br35"
