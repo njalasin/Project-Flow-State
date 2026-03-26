@@ -39,3 +39,4 @@ func target_position(target) -> void:
 
 func get_direction() -> Vector3:
 	return movement_direction
+	queue_free()

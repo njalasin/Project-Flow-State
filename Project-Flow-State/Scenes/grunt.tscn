@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkd8qn5xwd64"]
+[gd_scene format=3 uid="uid://bkd8qn5xwd64"]
 
 [ext_resource type="Script" uid="uid://ckppfpigf38kd" path="res://Assets/scripts/enemy/enemy_controller.gd" id="1_lg7gb"]
 [ext_resource type="Script" uid="uid://bhdijrxxscgxc" path="res://Assets/scripts/enemy/enemy_step_handler.gd" id="2_8iwud"]
@@ -13,24 +13,24 @@ material = SubResource("StandardMaterial3D_8iwud")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8iwud"]
 
-[node name="Grunt" type="CharacterBody3D" node_paths=PackedStringArray("enemy_step_handler", "standing_collision") groups=["enemy"]]
+[node name="Grunt" type="CharacterBody3D" unique_id=1268349543 node_paths=PackedStringArray("enemy_step_handler", "standing_collision") groups=["enemy"]]
 collision_layer = 8
 collision_mask = 15
 script = ExtResource("1_lg7gb")
 enemy_step_handler = NodePath("Components/EnemyStepHandler")
 standing_collision = NodePath("CollisionShape3D")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=983796946]
 mesh = SubResource("CapsuleMesh_co5wm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2089944083]
 shape = SubResource("CapsuleShape3D_8iwud")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1378648847]
 navigation_layers = 2
 
-[node name="Components" type="Node" parent="."]
+[node name="Components" type="Node" parent="." unique_id=1994248268]
 
-[node name="EnemyStepHandler" type="Node" parent="Components" node_paths=PackedStringArray("enemy_controller")]
+[node name="EnemyStepHandler" type="Node" parent="Components" unique_id=31139028 node_paths=PackedStringArray("enemy_controller")]
 script = ExtResource("2_8iwud")
 enemy_controller = NodePath("../..")

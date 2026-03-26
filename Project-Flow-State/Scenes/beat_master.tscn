@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://du8brjhfanrxf"]
+
+[ext_resource type="Script" uid="uid://cl3l0fkonlksy" path="res://Assets/scripts/system/beat_master.gd" id="1_cvftw"]
+[ext_resource type="AudioStream" uid="uid://b5sf17gbwuw5a" path="res://Assets/sounds/songs/SPACE_WITH_BAD_GUYS_v2_120BPM.ogg" id="2_1varn"]
+
+[node name="BeatMaster" type="Node" unique_id=957818401]
+script = ExtResource("1_cvftw")
+bpm = 120
+audioSource = ExtResource("2_1varn")
+
+[node name="StartBuffer" type="Timer" parent="." unique_id=1587691053]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1339180920]
+volume_db = -30.0
+
+[connection signal="timeout" from="StartBuffer" to="." method="_on_start_buffer_timeout"]
