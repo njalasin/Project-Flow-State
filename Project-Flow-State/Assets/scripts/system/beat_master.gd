@@ -13,12 +13,10 @@ var started := false
 
 func _ready() -> void:
 	secondsPerBeat = 60.0 / bpm
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not started:
 		return
-
 	# DSP-based song time
 	var dspTime = AudioServer.get_time_since_last_mix() + AudioServer.get_output_latency()
 	var songTimeDSP = dspTime - songStartDSPTime
@@ -26,16 +24,14 @@ func _process(delta):
 	# Actual playback position
 	var playbackTime = audioPlayer.get_playback_position()
 	
+	# Fix drifting
 	var drift = playbackTime - songTimeDSP
 
 	if abs(drift) > 0.02: # 20 ms threshold
 		songStartDSPTime -= drift
-	
-	# 🔥 Drift correction (blend both times)
-	var correctedTime = songTimeDSP + playbackTime
 
 	# Calculate what beat we should be on
-	var targetBeat = floor(correctedTime / secondsPerBeat)
+	var targetBeat = floor(songTimeDSP / secondsPerBeat)
 
 	# Trigger missed beats safely
 	while beatCount <= targetBeat:

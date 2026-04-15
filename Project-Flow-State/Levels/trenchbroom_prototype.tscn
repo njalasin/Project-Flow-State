@@ -266,8 +266,7 @@ shape = SubResource("ConvexPolygonShape3D_1kxt7")
 
 [node name="entity_1_func_movingplatform" type="AnimatableBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=393298781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 2.75, -9.5)
-collision_layer = 2
-collision_mask = 13
+collision_mask = 0
 script = ExtResource("7_nashu")
 move_direction = Vector3(0, -1, 0)
 

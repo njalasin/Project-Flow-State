@@ -9,7 +9,7 @@ bpm = 120
 audioSource = ExtResource("2_1varn")
 
 [node name="StartBuffer" type="Timer" parent="." unique_id=1587691053]
-wait_time = 3.0
+wait_time = 0.001
 one_shot = true
 autostart = true
 

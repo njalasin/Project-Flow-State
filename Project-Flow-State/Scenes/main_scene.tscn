@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4l7k1b8c4gai"]
 
 [ext_resource type="Script" uid="uid://6ecxlxe185we" path="res://Assets/scripts/system/game_manager.gd" id="1_ase3e"]
-[ext_resource type="Script" uid="uid://dp52y0kdbuj6g" path="res://Scenes/main_scene.gd" id="1_m1efj"]
+[ext_resource type="Script" uid="uid://dp52y0kdbuj6g" path="res://Assets/scripts/environment/main_scene.gd" id="1_m1efj"]
 [ext_resource type="PackedScene" uid="uid://hwq2sprxj3yw" path="res://Levels/trenchbroom_prototype.tscn" id="2_6l7je"]
 [ext_resource type="Script" uid="uid://c6pspixe41ebj" path="res://Assets/scripts/system/weapon_manager.gd" id="2_jv6wh"]
 [ext_resource type="PackedScene" uid="uid://bkd8qn5xwd64" path="res://Scenes/grunt.tscn" id="2_m1efj"]
