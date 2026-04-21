@@ -43,6 +43,7 @@ material = SubResource("StandardMaterial3D_cofru")
 [node name="Player" type="CharacterBody3D" unique_id=1962597566 node_paths=PackedStringArray("camera", "camera_effects", "weapon_controller", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast", "step_handler") groups=["Player"]]
 collision_layer = 2
 collision_mask = 9
+floor_snap_length = 0.3
 script = ExtResource("1_gxj8c")
 camera = NodePath("CameraController")
 camera_effects = NodePath("CameraController/Camera3D")

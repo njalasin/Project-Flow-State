@@ -46,8 +46,6 @@ const MAX_SCREEN_SHAKE : float = 0.5
 
 func _process(delta: float) -> void:
 	calculate_view_offset(delta)
-	if Input.is_action_pressed("test"):
-		add_damage_kick(5.0, 5.0, Vector3.ZERO)
 func calculate_view_offset(delta):
 	if not player_controller:
 		return

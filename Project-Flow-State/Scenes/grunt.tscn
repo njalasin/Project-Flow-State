@@ -27,7 +27,6 @@ mesh = SubResource("CapsuleMesh_co5wm")
 shape = SubResource("CapsuleShape3D_8iwud")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1378648847]
-navigation_layers = 2
 
 [node name="Components" type="Node" parent="." unique_id=1994248268]
 

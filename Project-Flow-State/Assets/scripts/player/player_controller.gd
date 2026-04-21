@@ -54,8 +54,7 @@ func _physics_process(delta) -> void: # This function is called every frame
 		velocity += get_gravity() * delta
 	previous_velocity = velocity
 	move_and_slide()
-	if is_on_floor():
-		step_handler.handle_step_climbing()
+	step_handler.handle_step_climbing()
 	# Ensure the shapecast updates its collision info
 	crouch_check.force_shapecast_update() 
 
