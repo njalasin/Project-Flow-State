@@ -1,3 +1,9 @@
+##
+## Weapon State Script
+## This tiny script assigns a weapon controller to the state machine
+##
+##
+
 class_name WeaponState extends Node
 
 var weapon_controller : WeaponController

@@ -1,3 +1,9 @@
+##
+## State Chart Debugger
+## Not my script. Installed from Godot's asset library for state chart debugging.
+##
+##
+
 @icon("state_chart_debugger.svg")
 extends Control
 

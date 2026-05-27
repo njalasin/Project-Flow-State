@@ -1,3 +1,9 @@
+##
+## Moving Platform Script
+## This script handles logic for any environment object that will move. Currently it just moves the object
+## up and down slowly
+##
+
 @tool
 class_name MovingPlatform extends AnimatableBody3D
 

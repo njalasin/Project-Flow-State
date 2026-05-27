@@ -1,3 +1,9 @@
+##
+## State Machine Script
+## This script is to be attached to the players state machine node and handles some debugging information on screen when enabled
+##
+##
+
 class_name PlayerStateMachine extends Node
 
 @export var debug : bool = false

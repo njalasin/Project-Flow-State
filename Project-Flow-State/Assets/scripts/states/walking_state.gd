@@ -1,3 +1,9 @@
+##
+## Walking State Script
+## This script is the state for when the player is moving but not sprinting and is grounded
+##
+##
+
 extends PlayerState
 
 func _on_walking_state_processing(delta: float) -> void:

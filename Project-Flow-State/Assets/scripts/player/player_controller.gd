@@ -1,3 +1,9 @@
+##
+## Player Controller Script
+## This is the bread and butter of this game. All movement logic and important functions for the player  
+## are processed here
+##
+
 extends PlayerController
 
 # Exported variables

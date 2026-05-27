@@ -1,3 +1,9 @@
+##
+## Weapon Idle Script
+## This is the default state for weapons when they are not being fired
+##
+##
+
 extends WeaponState
 
 # Called when the node enters the scene tree for the first time.

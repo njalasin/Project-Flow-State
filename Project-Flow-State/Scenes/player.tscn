@@ -40,7 +40,7 @@ material = SubResource("StandardMaterial3D_cofru")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6w7nj"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1962597566 node_paths=PackedStringArray("camera", "camera_effects", "weapon_controller", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast", "step_handler") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1962597566 node_paths=PackedStringArray("camera", "camera_effects", "weapon_controller", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast", "step_handler") groups=["Player", "player"]]
 collision_layer = 2
 collision_mask = 9
 floor_snap_length = 0.3
@@ -63,6 +63,7 @@ offset_right = 387.0
 offset_bottom = 650.0
 grow_horizontal = 1
 grow_vertical = 1
+enabled = false
 initial_node_to_watch = NodePath("../StateChart")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=730602495]

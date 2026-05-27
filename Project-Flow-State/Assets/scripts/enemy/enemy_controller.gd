@@ -1,3 +1,9 @@
+##
+## Enemy Controller
+## Functions similarly to the player controller with less logic. Inside is a step handler and all functions
+## for collisions
+##
+
 class_name EnemyController extends CharacterBody3D
 
 
@@ -39,4 +45,7 @@ func target_position(target) -> void:
 
 func get_direction() -> Vector3:
 	return movement_direction
+	queue_free()
+
+func _on_health_component_died():
 	queue_free()

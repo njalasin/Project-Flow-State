@@ -1,7 +1,7 @@
 [gd_resource type="MeshLibrary" format=3 uid="uid://cseb4xl2ewtgf"]
 
-[ext_resource type="Texture2D" uid="uid://k0cfnv4op88j" path="res://Assets/textures/Tileset/Scifi_Floor_TCom_Scifi_Panel_512x512_albedo.png" id="1_7snf6"]
-[ext_resource type="Texture2D" uid="uid://cqncfvtm1tlo" path="res://Assets/textures/Tileset/Scifi_Floor_TCom_Scifi_Panel_512x512_albedo_n.png" id="2_k8c1h"]
+[ext_resource type="Texture2D" uid="uid://cvsgvvydjxehy" path="res://Assets/textures/Tileset/Scifi_Floor_TCom_Scifi_Panel_512x512_albedo.png" id="1_7snf6"]
+[ext_resource type="Texture2D" uid="uid://xhbsbtynxwkn" path="res://Assets/textures/Tileset/Scifi_Floor_TCom_Scifi_Panel_512x512_albedo_n.png" id="2_k8c1h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjqhx"]
 resource_name = "Material.001"

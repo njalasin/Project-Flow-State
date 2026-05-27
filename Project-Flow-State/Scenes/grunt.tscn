@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://bkd8qn5xwd64"]
 
-[ext_resource type="Script" uid="uid://ckppfpigf38kd" path="res://Assets/scripts/enemy/enemy_controller.gd" id="1_lg7gb"]
+[ext_resource type="Script" uid="uid://c2qnnpb6r4bo3" path="res://Assets/scripts/enemy/enemy_grunt.gd" id="1_aeaer"]
 [ext_resource type="Script" uid="uid://bhdijrxxscgxc" path="res://Assets/scripts/enemy/enemy_step_handler.gd" id="2_8iwud"]
+[ext_resource type="Script" uid="uid://bdnlglxphmxc" path="res://Assets/scripts/components/health_component.gd" id="3_co5wm"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_aeaer"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_p76lo"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_wbucm"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_f4p51"]
+[ext_resource type="PackedScene" uid="uid://dwieni3afetl4" path="res://Assets/models/enemies/exported-model.glb" id="8_p76lo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8iwud"]
 albedo_color = Color(1, 0, 0, 1)
@@ -12,24 +18,207 @@ roughness = 0.2
 material = SubResource("StandardMaterial3D_8iwud")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8iwud"]
+height = 1.7487793
 
-[node name="Grunt" type="CharacterBody3D" unique_id=1268349543 node_paths=PackedStringArray("enemy_step_handler", "standing_collision") groups=["enemy"]]
+[sub_resource type="SphereShape3D" id="SphereShape3D_aeaer"]
+radius = 10.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p76lo"]
+animation = &"Fighting Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f4p51"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_5g542"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_p76lo")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_f4p51")
+blend_point_1/pos = 1.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_fgy0f"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p76lo"]
+graph_offset = Vector2(-480.53824, 18.025879)
+nodes/IdleChaseBlend/node = SubResource("AnimationNodeBlendSpace1D_5g542")
+nodes/IdleChaseBlend/position = Vector2(-320, 80)
+nodes/TimeSeek/node = SubResource("AnimationNodeTimeSeek_fgy0f")
+nodes/TimeSeek/position = Vector2(-100, 80)
+node_connections = [&"output", 0, &"TimeSeek", &"TimeSeek", 0, &"IdleChaseBlend"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbucm"]
+animation = &"Fighting Idle"
+
+[sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_f4p51"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5g542"]
+graph_offset = Vector2(-359, 14)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_wbucm")
+nodes/Idle/position = Vector2(-180, 100)
+nodes/TimeSeek/node = SubResource("AnimationNodeTimeSeek_f4p51")
+nodes/TimeSeek/position = Vector2(20, 100)
+node_connections = [&"output", 0, &"TimeSeek", &"TimeSeek", 0, &"Idle"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fgy0f"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4658b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ems4l"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_08nvt"]
+states/Follow/node = SubResource("AnimationNodeBlendTree_p76lo")
+states/Follow/position = Vector2(716, 108)
+states/Idle/node = SubResource("AnimationNodeBlendTree_5g542")
+states/Idle/position = Vector2(494, 108)
+states/Start/position = Vector2(264, 108)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_fgy0f"), "Idle", "Follow", SubResource("AnimationNodeStateMachineTransition_4658b"), "Follow", "Idle", SubResource("AnimationNodeStateMachineTransition_ems4l")]
+
+[node name="Grunt" type="CharacterBody3D" unique_id=1268349543 groups=["enemy"]]
 collision_layer = 8
 collision_mask = 15
-script = ExtResource("1_lg7gb")
-enemy_step_handler = NodePath("Components/EnemyStepHandler")
-standing_collision = NodePath("CollisionShape3D")
+script = ExtResource("1_aeaer")
+
+[node name="GruntModel" parent="." unique_id=1206214495 instance=ExtResource("8_p76lo")]
+
+[node name="Skeleton3D" parent="GruntModel/Skinned Mesh 0" parent_id_path=PackedInt32Array(1206214495, 394697227) index="0" unique_id=710440786]
+bones/1/position = Vector3(-0.013620387, 0.11985195, 0.8707773)
+bones/1/rotation = Quaternion(0.7478977, 0.2155423, 0.16564396, 0.60560113)
+bones/2/rotation = Quaternion(-0.04078342, -0.0018630925, 0.006510303, 0.9991451)
+bones/3/rotation = Quaternion(-0.028866317, -0.046785656, 0.014061443, 0.99838877)
+bones/4/rotation = Quaternion(-0.048108242, -0.04873244, 0.0088832, 0.9976131)
+bones/5/rotation = Quaternion(0.3109, -0.055652574, 0.015042763, 0.9486926)
+bones/6/rotation = Quaternion(-0.1936706, -0.05636195, 0.018437708, 0.9792728)
+bones/7/rotation = Quaternion(-0.03964982, 4.1857078e-08, -7.690263e-09, 0.9992137)
+bones/8/rotation = Quaternion(-0.54990363, -0.27436054, -0.32092413, 0.7206525)
+bones/9/rotation = Quaternion(0.25989428, -0.5987849, 0.5529346, -0.5178562)
+bones/10/rotation = Quaternion(0.6909555, 0.0070846453, -0.15335745, 0.7064077)
+bones/11/rotation = Quaternion(0.2210742, -0.09810167, -0.117267266, 0.9631982)
+bones/12/rotation = Quaternion(0.46830535, 0.52913165, -0.44060183, 0.5536966)
+bones/13/rotation = Quaternion(0.63904744, -0.030215519, -0.0393609, 0.7675652)
+bones/14/rotation = Quaternion(0.63025934, -0.07772707, -0.066372335, 0.7696274)
+bones/15/rotation = Quaternion(1.6721478e-09, 0.45398957, 6.8621038e-09, 0.891007)
+bones/16/rotation = Quaternion(0.45153162, 0.5337282, -0.45721728, 0.5497326)
+bones/17/rotation = Quaternion(0.64003736, -0.009096003, -0.039638177, 0.76726675)
+bones/18/rotation = Quaternion(0.63288325, -0.057714418, -0.068430066, 0.7690548)
+bones/19/rotation = Quaternion(-1.2981215e-07, 0.45398957, 0.020704364, 0.89076644)
+bones/20/rotation = Quaternion(0.46841863, 0.5226654, -0.45627463, 0.5470087)
+bones/21/rotation = Quaternion(0.6407666, -0.006043018, -0.038384505, 0.76675177)
+bones/22/rotation = Quaternion(0.63390326, -0.047198363, -0.06763493, 0.7690023)
+bones/23/rotation = Quaternion(-0.5240416, 0.5521552, 0.03588408, -0.6474701)
+bones/24/rotation = Quaternion(0.4552745, 0.5320835, -0.45294505, 0.55177265)
+bones/25/rotation = Quaternion(0.64000964, -0.013974464, -0.04044064, 0.7671747)
+bones/26/rotation = Quaternion(0.63244355, -0.061589748, -0.068156816, 0.7691402)
+bones/27/rotation = Quaternion(-0.52049434, 0.55760145, 0.04539878, -0.64506215)
+bones/28/rotation = Quaternion(0.40114987, 0.9053205, 0.113867655, -0.08067073)
+bones/29/rotation = Quaternion(0.5539631, 0.08607124, 0.020199027, 0.8278337)
+bones/30/rotation = Quaternion(0.40980607, 0.037542272, -0.07539697, 0.90827584)
+bones/31/rotation = Quaternion(0.04393851, 0.14763601, -0.016504293, 0.98792744)
+bones/32/rotation = Quaternion(-0.54991764, 0.27288714, 0.32027212, 0.7214909)
+bones/33/rotation = Quaternion(0.18242283, 0.67240053, -0.5654737, -0.4414058)
+bones/34/rotation = Quaternion(0.5978426, 0.0014978368, 0.16736524, 0.7839458)
+bones/35/rotation = Quaternion(-0.0293922, -0.055671193, 0.04444532, 0.9970264)
+bones/36/rotation = Quaternion(0.46830514, -0.5291317, 0.44060183, 0.55369663)
+bones/37/rotation = Quaternion(0.6390472, 0.03021532, 0.03936094, 0.76756525)
+bones/38/rotation = Quaternion(0.6302595, 0.07772698, 0.06637223, 0.7696273)
+bones/39/rotation = Quaternion(1.1030197e-08, 0.45398954, 4.0992862e-09, -0.89100707)
+bones/40/rotation = Quaternion(0.45153153, -0.5337281, 0.45721734, 0.54973257)
+bones/41/rotation = Quaternion(0.6400375, 0.009095953, 0.039638113, 0.7672668)
+bones/42/rotation = Quaternion(0.63288325, 0.057714406, 0.068430096, 0.7690548)
+bones/43/rotation = Quaternion(8.564269e-08, 0.45398954, 0.020704374, -0.8907665)
+bones/44/rotation = Quaternion(0.4684186, -0.5226654, 0.45627457, 0.54700863)
+bones/45/rotation = Quaternion(0.64076656, 0.0060430756, 0.03838441, 0.76675177)
+bones/46/rotation = Quaternion(0.6339035, 0.04719843, 0.0676351, 0.7690021)
+bones/47/rotation = Quaternion(0.5240415, 0.5521551, 0.035884056, 0.64747024)
+bones/48/rotation = Quaternion(0.45527434, -0.53208375, 0.45294505, 0.55177265)
+bones/49/rotation = Quaternion(0.6400098, 0.013974364, 0.04044062, 0.76717454)
+bones/50/rotation = Quaternion(0.6324434, 0.06158973, 0.068156846, 0.7691402)
+bones/51/rotation = Quaternion(0.52049446, 0.5576014, 0.04539875, 0.6450621)
+bones/52/rotation = Quaternion(-0.4011497, 0.9053206, 0.113867804, 0.08067063)
+bones/53/rotation = Quaternion(0.5539631, -0.08607119, -0.020199005, 0.8278337)
+bones/54/rotation = Quaternion(0.4098058, -0.037542384, 0.07539688, 0.9082759)
+bones/55/rotation = Quaternion(0.043938495, -0.14763598, 0.016504273, 0.9879275)
+bones/56/rotation = Quaternion(0.95386165, 0.112644404, -0.09968035, 0.2598523)
+bones/57/rotation = Quaternion(0.43278, 0.010990947, 0.006457081, 0.90140945)
+bones/58/rotation = Quaternion(-0.57433176, -0.036068745, 0.09390237, 0.812419)
+bones/59/rotation = Quaternion(1.831243e-05, 0.9732871, -0.22959185, 0.0001663534)
+bones/60/rotation = Quaternion(0.007946765, -4.8269058e-08, 3.692984e-10, 0.9999684)
+bones/61/rotation = Quaternion(0.93439865, -0.037012823, 0.19592378, 0.2952003)
+bones/62/rotation = Quaternion(0.25126684, 0.000956367, 0.00017019513, 0.96791744)
+bones/63/rotation = Quaternion(-0.52390116, 0.07298136, -0.012923674, 0.84854835)
+bones/64/rotation = Quaternion(0.0005254302, 0.96700317, -0.25476384, -0.00040467322)
+bones/65/rotation = Quaternion(0.007946765, 2.848078e-08, -2.3827067e-09, 0.9999684)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=983796946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_co5wm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2089944083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87561035, 0)
 shape = SubResource("CapsuleShape3D_8iwud")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1378648847]
+target_desired_distance = 1.6
+avoidance_enabled = true
 
 [node name="Components" type="Node" parent="." unique_id=1994248268]
 
 [node name="EnemyStepHandler" type="Node" parent="Components" unique_id=31139028 node_paths=PackedStringArray("enemy_controller")]
 script = ExtResource("2_8iwud")
 enemy_controller = NodePath("../..")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1818546015]
+script = ExtResource("3_co5wm")
+metadata/_custom_type_script = "uid://bdnlglxphmxc"
+
+[node name="StateChart" type="Node" parent="." unique_id=46385658]
+script = ExtResource("4_aeaer")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart" unique_id=341652093]
+script = ExtResource("5_p76lo")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="IdleState" type="Node" parent="StateChart/Root" unique_id=1985480335]
+script = ExtResource("6_wbucm")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="FollowState" type="Node" parent="StateChart/Root" unique_id=1757634450]
+script = ExtResource("6_wbucm")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="ToIdle" type="Node" parent="StateChart/Root" unique_id=1698589571]
+script = ExtResource("7_f4p51")
+to = NodePath("../IdleState")
+event = &"toIdle"
+delay_in_seconds = "0.0"
+
+[node name="ToFollow" type="Node" parent="StateChart/Root" unique_id=1102232913]
+script = ExtResource("7_f4p51")
+to = NodePath("../FollowState")
+event = &"toFollow"
+delay_in_seconds = "0.0"
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=147123875]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=2129529280]
+shape = SubResource("SphereShape3D_aeaer")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=452353113]
+root_node = NodePath("../GruntModel")
+tree_root = SubResource("AnimationNodeStateMachine_08nvt")
+anim_player = NodePath("../GruntModel/AnimationPlayer")
+parameters/Follow/IdleChaseBlend/blend_position = 0.3
+parameters/Follow/TimeSeek/seek_request = -1.0
+parameters/Idle/TimeSeek/seek_request = -1.0
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="state_physics_processing" from="StateChart/Root/FollowState" to="." method="_on_follow_state_physics_processing"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+
+[editable path="GruntModel"]

@@ -1,3 +1,9 @@
+##
+## Grounded State Script
+## This is the state script that runs when the player is on the ground
+##
+##
+
 extends PlayerState
 
 

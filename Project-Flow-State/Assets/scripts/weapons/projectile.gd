@@ -1,3 +1,9 @@
+##
+## Projectile Script
+## This script allows projectiles to be fired from any weapon and handles when they appear and disappear
+##
+##
+
 class_name Projectile extends Area3D
 
 var velocity : Vector3
@@ -18,6 +24,12 @@ func setup(vel: Vector3, dmg: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	print("Projectile hit: ", body.name, " at ", global_position)
 	_spawn_impact_marker(global_position)
+	
+	var health_component = body.get_node_or_null("HealthComponent")
+	
+	if health_component and health_component.has_method("take_damage"):
+		health_component.take_damage(damage, self)
+	
 	queue_free()
 
 func _spawn_impact_marker(position: Vector3) -> void:

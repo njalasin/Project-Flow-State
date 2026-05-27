@@ -28,11 +28,14 @@ weapons = Dictionary[int, ExtResource("3_iacmt")]({
 })
 player = NodePath("../../CurrentLevel/Player")
 
+[node name="BeatMaster" parent="Managers" unique_id=957818401 instance=ExtResource("8_huasi")]
+
 [node name="CurrentLevel" type="Node3D" parent="." unique_id=1580375610]
 
 [node name="Game" parent="CurrentLevel" unique_id=1614045081 instance=ExtResource("8_mai8y")]
 
-[node name="Player" parent="CurrentLevel" unique_id=495328314 groups=["player"] instance=ExtResource("7_maf8m")]
+[node name="Player" parent="CurrentLevel" unique_id=495328314 instance=ExtResource("7_maf8m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5025597, 0)
 
-[node name="BeatMaster" parent="CurrentLevel" unique_id=957818401 instance=ExtResource("8_huasi")]
+[node name="Grunt" parent="CurrentLevel" unique_id=1268349543 instance=ExtResource("2_m1efj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49556005, -31.433975)

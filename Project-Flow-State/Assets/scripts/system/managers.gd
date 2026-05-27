@@ -1,3 +1,9 @@
+##
+## Manager Script
+## This is the parent script for all manager scripts
+##
+##
+
 extends Node
 
 var weapon_manager: WeaponManager

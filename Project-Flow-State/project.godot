@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Managers="*res://Assets/scripts/system/managers.gd"
+BeatMaster="*uid://cl3l0fkonlksy"
 
 [editor_plugins]
 

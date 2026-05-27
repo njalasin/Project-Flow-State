@@ -1,3 +1,9 @@
+##
+## Weapon Pickup Script
+## This is the base class for all weapon pickups reloading ammo if the weapon has already been unlocked and
+## unlocking it if it hasn't
+##
+
 class_name WeaponPickup extends BasePickup
 
 @export var slot: int

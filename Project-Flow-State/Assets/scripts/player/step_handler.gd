@@ -1,3 +1,9 @@
+##
+## Step Handler Script
+## This script handles stair logic for the player. Without this the player cannot climb stairs.
+##
+##
+
 class_name StepHandlerComponent extends Node
 
 @export_category("References")

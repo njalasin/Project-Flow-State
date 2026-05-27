@@ -1,3 +1,9 @@
+##
+## Camera Controller Script
+## This is where all camera movement relative to the player is processed
+##
+##
+
 class_name CameraController extends Node3D
 
 @export var debug : bool = false

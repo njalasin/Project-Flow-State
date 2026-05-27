@@ -1,3 +1,9 @@
+##
+## Weapon Script
+## This is the base class for all weapon types, defaulting to the base rifle
+##
+##
+
 class_name Weapon extends Resource
 
 @export var weapon_name : String = "Rifle"

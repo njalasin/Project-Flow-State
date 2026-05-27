@@ -1,3 +1,9 @@
+##
+## Main Scene Script
+## This script allows for some development tools within the main scene such as spawning enemies for testing
+##
+##
+
 extends Node
 
 @export var enemyToSpawn: PackedScene

@@ -1,3 +1,9 @@
+##
+## Weapon State Script
+## This script allows for reloading, and disallows ocntinuing to shoot without ammo
+##
+##
+
 extends WeaponState
 
 func _on_empty_state_entered() -> void:

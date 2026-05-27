@@ -1,3 +1,9 @@
+##
+## Ammo Pickup Script
+## This is the parent class for all ammo pickups regardless of ammo type
+##
+##
+
 @tool
 
 class_name AmmoPickup extends BasePickup

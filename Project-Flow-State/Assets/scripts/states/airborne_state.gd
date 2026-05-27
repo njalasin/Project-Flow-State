@@ -1,3 +1,9 @@
+##
+## Airborne State Script
+## This script is to be attached to a state machine and act as the state in which the player is
+## either falling or jumping
+##
+
 extends PlayerState
 
 

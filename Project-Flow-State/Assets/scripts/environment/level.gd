@@ -1,3 +1,9 @@
+##
+## Level Script
+## This is the script that handles all logic pertaining to the level
+##
+##
+
 extends Node3D
 
 @onready var target = get_tree().get_first_node_in_group("player")

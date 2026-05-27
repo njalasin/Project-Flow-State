@@ -1,3 +1,9 @@
+##
+## Weapon Controller Script
+## This is where weapon firing and ammo consumption logic is processed
+##
+##
+
 class_name WeaponController extends Node
 
 @export var camera : Camera3D
@@ -72,6 +78,8 @@ func _perform_hitscan() -> void:
 		if result:
 			print("Hit: ", result.collider.name, " at ", result.position)
 			_spawn_impact_marker(result.position)
+			
+			_apply_damage_to_target(result.collider)
 
 func _spawn_impact_marker(position: Vector3) -> void:
 	var marker = MeshInstance3D.new()
@@ -129,3 +137,10 @@ func switch_weapon(weapon_data: WeaponData) -> void:
 func has_ammo() -> bool:
 	var weapon_data = Managers.weapon_manager.weapons[Managers.weapon_manager.current_slot]
 	return weapon_data.ammo > 0
+
+func _apply_damage_to_target(target: Node3D) -> void:
+	# Check if target has a Health Component
+	var health_component = target.get_node_or_null("HealthComponent")
+	
+	if health_component and health_component.has_method("take_damage"):
+		health_component.take_damage(current_weapon.damage, owner)

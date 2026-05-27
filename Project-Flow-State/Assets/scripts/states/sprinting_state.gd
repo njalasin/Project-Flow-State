@@ -1,3 +1,9 @@
+##
+## Sprinting State Script
+## This script is the state the processes when the player is holding their "sprint" key 
+##
+##
+
 extends PlayerState
 
 func _on_sprinting_state_processing(delta: float) -> void:

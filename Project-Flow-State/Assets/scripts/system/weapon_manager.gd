@@ -1,3 +1,9 @@
+##
+## Weapon Manager Script
+## This is the base manager for weapon handling and allows for reloading and switching between weapons via keybinds
+##
+##
+
 class_name WeaponManager extends Node
 
 @export var weapons: Dictionary[int, WeaponData] = {}

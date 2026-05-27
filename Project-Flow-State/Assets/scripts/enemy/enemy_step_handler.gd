@@ -1,3 +1,9 @@
+##
+## Enemy Step Handler Script
+## This is the script that allows enemies to climb stairs. This uses raycasts and collisions to "teleport" the
+## entity up to the next step
+##
+
 class_name EnemyStepHandlerComponent extends Node
 
 @export_category("References")

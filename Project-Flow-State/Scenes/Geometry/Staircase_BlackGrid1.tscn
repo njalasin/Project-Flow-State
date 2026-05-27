@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bn36nq3cajjq6"]
+
+[ext_resource type="Texture2D" uid="uid://bgvw8rjklj7u2" path="res://Assets/textures/PrototypeTextures/BlackGrid1.tres" id="1_godgx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uewo"]
+albedo_texture = ExtResource("1_godgx")
+
+[node name="Staircase" type="CSGCombiner3D" unique_id=904808647]
+use_collision = true
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1962054567]
+size = Vector3(3, 0.5, 1)
+material = SubResource("StandardMaterial3D_7uewo")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1012875396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+size = Vector3(3, 0.5, 1)
+material = SubResource("StandardMaterial3D_7uewo")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=243589123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+size = Vector3(3, 0.5, 1)
+material = SubResource("StandardMaterial3D_7uewo")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=522518016]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+size = Vector3(3, 0.5, 1)
+material = SubResource("StandardMaterial3D_7uewo")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=2002314958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+size = Vector3(3, 0.5, 1)
+material = SubResource("StandardMaterial3D_7uewo")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=819268284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -1.5)
+size = Vector3(3, 0.5, 1)
+material = SubResource("StandardMaterial3D_7uewo")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=587209864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+size = Vector3(3, 0.5, 1)
+material = SubResource("StandardMaterial3D_7uewo")

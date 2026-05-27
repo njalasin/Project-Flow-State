@@ -1,3 +1,9 @@
+##
+## Idle State Script
+## This script runs when the player is grounded and not moving
+##
+##
+
 extends PlayerState
 
 func _on_idle_state_processing(delta: float) -> void:

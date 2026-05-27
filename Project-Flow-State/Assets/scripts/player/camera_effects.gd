@@ -1,3 +1,9 @@
+##
+## Camera Effects Script
+## This is where all visual effects relative to the player are processed
+##
+##
+
 class_name CameraEffects extends Camera3D
 
 @export_category("References")

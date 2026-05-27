@@ -1,3 +1,9 @@
+##
+## Weapon Data Script
+## This is a simple data class that allows for weapons to have ammo and be unlocked dynamically
+##
+##
+
 class_name WeaponData extends Resource
 
 @export var weapon: Weapon
