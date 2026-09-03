@@ -21,6 +21,7 @@ dest_files=["res://.godot/imported/bulletPEW_bulletpew_color.png-f9b9b9ccfa9088a
 
 compress/mode=2
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

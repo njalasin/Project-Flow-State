@@ -17,6 +17,7 @@ dest_files=["res://.godot/imported/texture_13.svg-5160d5f4f5c4e61dd03d6620bfafb7
 
 compress/mode=0
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

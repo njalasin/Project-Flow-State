@@ -21,6 +21,7 @@ dest_files=["res://.godot/imported/ak47variant_akmat.png-d7f3e6a9f0a7f9222b9fb78
 
 compress/mode=2
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

@@ -11,4 +11,4 @@ extends Node
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("test"):
 		var enemyInstance = enemyToSpawn.instantiate()
-		$CurrentLevel.add_child(enemyInstance)
+		get_tree().root.get_node("MainScene/CurrentLevel").add_child(enemyInstance)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://db4k68ti3w0n1"]
+[gd_scene format=3 uid="uid://db4k68ti3w0n1"]
 
 [ext_resource type="PackedScene" uid="uid://cavpln2ver17v" path="res://Scenes/base_pickup.tscn" id="1_suvf0"]
 [ext_resource type="Script" uid="uid://lkp4hnl47xb8" path="res://Assets/scripts/environment/pickups/ammo_pickup.gd" id="2_d3c0c"]
@@ -12,9 +12,10 @@ metallic_specular = 1.0
 material = SubResource("StandardMaterial3D_suvf0")
 size = Vector3(0.5, 0.5, 0.75)
 
-[node name="AmmoPickup" instance=ExtResource("1_suvf0")]
+[node name="AmmoPickup" unique_id=1129373122 instance=ExtResource("1_suvf0")]
+transform = Transform3D(0.9931748, 0, 0.11663469, 0, 1, 0, -0.11663469, 0, 0.9931748, 0, 0.022141378, 0)
 script = ExtResource("2_d3c0c")
 ammo_amount = 10
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=1425189678]
 mesh = SubResource("BoxMesh_d3c0c")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1qoup72pqbbk"]
+[gd_scene format=3 uid="uid://c1qoup72pqbbk"]
 
 [ext_resource type="PackedScene" uid="uid://c6x1jxr7cx4a8" path="res://Scenes/player.tscn" id="1_iac22"]
 
@@ -31,36 +31,36 @@ background_mode = 2
 background_color = Color(0.581033, 0.581033, 0.581033, 1)
 sky = SubResource("Sky_to0tq")
 
-[node name="PrototypeLevel" type="Node3D"]
+[node name="PrototypeLevel" type="Node3D" unique_id=1593603811]
 
-[node name="Player" parent="." instance=ExtResource("1_iac22")]
+[node name="Player" parent="." unique_id=722822731 instance=ExtResource("1_iac22")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Geometry" type="Node3D" parent="."]
+[node name="Geometry" type="Node3D" parent="." unique_id=1626964076]
 
-[node name="Floor" type="StaticBody3D" parent="Geometry"]
+[node name="Floor" type="StaticBody3D" parent="Geometry" unique_id=1647478897]
 collision_layer = 2
 collision_mask = 13
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Floor" unique_id=14936139]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
 mesh = SubResource("BoxMesh_fhx2q")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Floor" unique_id=995592547]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
 shape = SubResource("BoxShape3D_4jr6y")
 
-[node name="Platform" type="StaticBody3D" parent="Geometry"]
+[node name="Platform" type="StaticBody3D" parent="Geometry" unique_id=288817704]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 3, 0)
 collision_layer = 2
 collision_mask = 15
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Platform"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Platform" unique_id=1755537513]
 transform = Transform3D(2, 0, 0, 0, 0.2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("BoxMesh_py3ln")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Platform"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Platform" unique_id=1335993162]
 shape = SubResource("BoxShape3D_doff3")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2137137951]
 environment = SubResource("Environment_gb5i8")

@@ -18,6 +18,7 @@ dest_files=["res://.godot/imported/ak47variant_1.png-1d27af5ae6b7620b9f7648c3f1c
 
 compress/mode=2
 compress/high_quality=false
+compress/high_quality_mode=0
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

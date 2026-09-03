@@ -6,7 +6,7 @@
 
 extends Node
 
-var weapon_manager: WeaponManager
+var weapon_manager := WeaponManager.new()
 
 func _ready() -> void:
 	call_deferred("find_managers")

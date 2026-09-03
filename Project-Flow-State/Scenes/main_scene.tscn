@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c6x1jxr7cx4a8" path="res://Scenes/player.tscn" id="7_maf8m"]
 [ext_resource type="PackedScene" uid="uid://du8brjhfanrxf" path="res://Scenes/beat_master.tscn" id="8_huasi"]
 [ext_resource type="PackedScene" uid="uid://cr5yac5muud8x" path="res://Levels/game.tscn" id="8_mai8y"]
+[ext_resource type="AudioStream" uid="uid://b5sf17gbwuw5a" path="res://Assets/sounds/music/songs/SPACE_WITH_BAD_GUYS_v2_120BPM.ogg" id="9_76v2p"]
 
 [node name="MainScene" type="Node" unique_id=1665874254]
 script = ExtResource("1_m1efj")
@@ -28,7 +29,10 @@ weapons = Dictionary[int, ExtResource("3_iacmt")]({
 })
 player = NodePath("../../CurrentLevel/Player")
 
-[node name="BeatMaster" parent="Managers" unique_id=957818401 instance=ExtResource("8_huasi")]
+[node name="BeatMaster" parent="Managers" unique_id=957818401 node_paths=PackedStringArray("player_controller") instance=ExtResource("8_huasi")]
+beatWindow = 0.05
+audioSource = ExtResource("9_76v2p")
+player_controller = NodePath("../../CurrentLevel/Player")
 
 [node name="CurrentLevel" type="Node3D" parent="." unique_id=1580375610]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://iewxecs0uwss"]
+[gd_scene format=3 uid="uid://iewxecs0uwss"]
 
 [ext_resource type="Script" uid="uid://dctc1yeiwh0wx" path="res://addons/godot_state_charts_examples/stepping/stepping.gd" id="1_8d8ax"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_u4aev"]
@@ -8,24 +8,24 @@
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_n6kwq"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_78ppn"]
 
-[node name="SteppingExample" type="Node2D"]
+[node name="SteppingExample" type="Node2D" unique_id=1509331098]
 script = ExtResource("1_8d8ax")
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("1_u4aev")]
+[node name="StateChartDebugger" parent="." unique_id=1388080761 instance=ExtResource("1_u4aev")]
 offset_left = 353.0
 offset_top = 5.0
 offset_right = 635.0
 offset_bottom = 326.0
 initial_node_to_watch = NodePath("../StateChart")
 
-[node name="NextRoundButton" type="Button" parent="."]
+[node name="NextRoundButton" type="Button" parent="." unique_id=545959237]
 offset_left = 500.0
 offset_top = 421.0
 offset_right = 611.0
 offset_bottom = 454.0
 text = "Next Round"
 
-[node name="AddCoalToDrillButton" type="Button" parent="."]
+[node name="AddCoalToDrillButton" type="Button" parent="." unique_id=59951579]
 unique_name_in_owner = true
 offset_left = 371.0
 offset_top = 422.0
@@ -33,62 +33,64 @@ offset_right = 482.0
 offset_bottom = 455.0
 text = "Add Coal"
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=614576619]
 unique_name_in_owner = true
 script = ExtResource("2_7ehwm")
 track_in_editor = true
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=1370750453]
 script = ExtResource("4_ohpt6")
 
-[node name="Drill" type="Node" parent="StateChart/Root"]
+[node name="Drill" type="Node" parent="StateChart/Root" unique_id=1444105128]
 script = ExtResource("5_xbwwa")
 initial_state = NodePath("Drill Has No Coal")
 
-[node name="Drill Has Coal" type="Node" parent="StateChart/Root/Drill"]
+[node name="Drill Has Coal" type="Node" parent="StateChart/Root/Drill" unique_id=1595179397]
 editor_description = "When in this state, the drill has coal and will produce two more coal per round."
 script = ExtResource("6_n6kwq")
 
-[node name="On Coal Depleted" type="Node" parent="StateChart/Root/Drill/Drill Has Coal"]
+[node name="On Coal Depleted" type="Node" parent="StateChart/Root/Drill/Drill Has Coal" unique_id=1493084991]
 script = ExtResource("7_78ppn")
 to = NodePath("../../Drill Has No Coal")
 event = &"coal_depleted"
+delay_in_seconds = "0.0"
 
-[node name="Drill Has No Coal" type="Node" parent="StateChart/Root/Drill"]
+[node name="Drill Has No Coal" type="Node" parent="StateChart/Root/Drill" unique_id=451275891]
 editor_description = "When in this state, the drill will do nothing."
 script = ExtResource("6_n6kwq")
 
-[node name="On Coal Available" type="Node" parent="StateChart/Root/Drill/Drill Has No Coal"]
+[node name="On Coal Available" type="Node" parent="StateChart/Root/Drill/Drill Has No Coal" unique_id=1691264957]
 script = ExtResource("7_78ppn")
 to = NodePath("../../Drill Has Coal")
 event = &"coal_available"
+delay_in_seconds = "0.0"
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=424606162]
 offset_left = 366.0
 offset_top = 333.0
 offset_right = 518.0
 offset_bottom = 389.0
 columns = 2
 
-[node name="Label" type="Label" parent="GridContainer"]
+[node name="Label" type="Label" parent="GridContainer" unique_id=727832040]
 layout_mode = 2
 text = "Coal mined: "
 
-[node name="CoalAvailableLabel" type="Label" parent="GridContainer"]
+[node name="CoalAvailableLabel" type="Label" parent="GridContainer" unique_id=1907353273]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0"
 
-[node name="Label2" type="Label" parent="GridContainer"]
+[node name="Label2" type="Label" parent="GridContainer" unique_id=1156477462]
 layout_mode = 2
 text = "Coal in drill:"
 
-[node name="CoalInDrillLabel" type="Label" parent="GridContainer"]
+[node name="CoalInDrillLabel" type="Label" parent="GridContainer" unique_id=61357696]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0"
 
-[node name="Info" type="Label" parent="."]
+[node name="Info" type="Label" parent="." unique_id=43296098]
 offset_left = 13.0
 offset_top = 22.0
 offset_right = 322.0

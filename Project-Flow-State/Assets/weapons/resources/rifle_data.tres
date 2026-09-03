@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://dwfquaassvega"]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dwfquaassvega"]
 
 [ext_resource type="Script" uid="uid://c2ksc6v681als" path="res://Assets/scripts/weapons/weapon_data.gd" id="1_ca5g7"]
 [ext_resource type="Resource" uid="uid://cf8u7pabonlrd" path="res://Assets/weapons/resources/rifle.tres" id="2_5mqw4"]

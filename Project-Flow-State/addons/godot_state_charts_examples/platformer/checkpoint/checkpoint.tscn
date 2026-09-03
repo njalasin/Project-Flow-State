@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b22lg10c7wxrq"]
+[gd_scene format=3 uid="uid://b22lg10c7wxrq"]
 
 [ext_resource type="Texture2D" uid="uid://4nlen5j7etvq" path="res://addons/godot_state_charts_examples/platformer/checkpoint/checkpoint_no_flag.png" id="1_7vf2w"]
 [ext_resource type="Script" uid="uid://ccsukp7vuknqs" path="res://addons/godot_state_charts_examples/platformer/checkpoint/checkpoint.gd" id="1_jot5v"]
@@ -210,11 +210,11 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5pqa5"]
 _data = {
-"RESET": SubResource("Animation_xvggk"),
-"close_flag": SubResource("Animation_p66ga"),
-"idle_no_flag": SubResource("Animation_w48c8"),
-"idle_with_flag": SubResource("Animation_judeo"),
-"open_flag": SubResource("Animation_gr2w7")
+&"RESET": SubResource("Animation_xvggk"),
+&"close_flag": SubResource("Animation_p66ga"),
+&"idle_no_flag": SubResource("Animation_w48c8"),
+&"idle_with_flag": SubResource("Animation_judeo"),
+&"open_flag": SubResource("Animation_gr2w7")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_06im6"]
@@ -226,111 +226,115 @@ script = ExtResource("10_fk2fi")
 state = NodePath("../../../../Player Presence/Absent")
 metadata/_editor_prop_ptr_state = NodePath("../../../Player Presence/Absent")
 
-[node name="Checkpoint" type="Node2D"]
+[node name="Checkpoint" type="Node2D" unique_id=1490620436]
 script = ExtResource("1_jot5v")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=285359960]
 texture_filter = 1
 texture = ExtResource("1_7vf2w")
 offset = Vector2(0, -32)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_5pqa5")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1555219525]
+libraries/ = SubResource("AnimationLibrary_5pqa5")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1845302517]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1218726630]
 position = Vector2(-2, -26)
 shape = SubResource("CapsuleShape2D_06im6")
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=646621967]
 script = ExtResource("5_a58ma")
 track_in_editor = true
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=1100936566]
 script = ExtResource("6_53g38")
 
-[node name="Player Presence" type="Node" parent="StateChart/Root"]
+[node name="Player Presence" type="Node" parent="StateChart/Root" unique_id=1841359915]
 editor_description = "This compound state represents whether the player is currently present at the checkpoint."
 script = ExtResource("6_qkwqk")
 initial_state = NodePath("Absent")
 
-[node name="Absent" type="Node" parent="StateChart/Root/Player Presence"]
+[node name="Absent" type="Node" parent="StateChart/Root/Player Presence" unique_id=1103428476]
 script = ExtResource("7_a74k1")
 
-[node name="On Player Enter" type="Node" parent="StateChart/Root/Player Presence/Absent"]
+[node name="On Player Enter" type="Node" parent="StateChart/Root/Player Presence/Absent" unique_id=750369164]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Present")
 event = &"player_entered"
+delay_in_seconds = "0.0"
 
-[node name="Present" type="Node" parent="StateChart/Root/Player Presence"]
+[node name="Present" type="Node" parent="StateChart/Root/Player Presence" unique_id=161188245]
 script = ExtResource("7_a74k1")
 
-[node name="On Player Exit" type="Node" parent="StateChart/Root/Player Presence/Present"]
+[node name="On Player Exit" type="Node" parent="StateChart/Root/Player Presence/Present" unique_id=592043466]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Absent")
 event = &"player_exited"
+delay_in_seconds = "0.0"
 
-[node name="Animation Control" type="Node" parent="StateChart/Root"]
+[node name="Animation Control" type="Node" parent="StateChart/Root" unique_id=1825140060]
 script = ExtResource("6_qkwqk")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root/Animation Control"]
+[node name="Idle" type="Node" parent="StateChart/Root/Animation Control" unique_id=1493075216]
 script = ExtResource("7_a74k1")
 
-[node name="On Player Enter" type="Node" parent="StateChart/Root/Animation Control/Idle"]
+[node name="On Player Enter" type="Node" parent="StateChart/Root/Animation Control/Idle" unique_id=1122948417]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Expanding")
 event = &"player_entered"
+delay_in_seconds = "0.0"
 
-[node name="Expanding" type="Node" parent="StateChart/Root/Animation Control"]
+[node name="Expanding" type="Node" parent="StateChart/Root/Animation Control" unique_id=1221476552]
 script = ExtResource("7_a74k1")
 
-[node name="After 1 s" type="Node" parent="StateChart/Root/Animation Control/Expanding"]
+[node name="After 1 s" type="Node" parent="StateChart/Root/Animation Control/Expanding" unique_id=26715707]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Activated/Expanded")
-delay_seconds = 0.9
+delay_in_seconds = "0.9"
 
-[node name="Activated" type="Node" parent="StateChart/Root/Animation Control"]
+[node name="Activated" type="Node" parent="StateChart/Root/Animation Control" unique_id=414242002]
 script = ExtResource("6_qkwqk")
 initial_state = NodePath("Expanded")
 
-[node name="Expanded" type="Node" parent="StateChart/Root/Animation Control/Activated"]
+[node name="Expanded" type="Node" parent="StateChart/Root/Animation Control/Activated" unique_id=152834268]
 script = ExtResource("7_a74k1")
 
-[node name="Immediately" type="Node" parent="StateChart/Root/Animation Control/Activated/Expanded"]
+[node name="Immediately" type="Node" parent="StateChart/Root/Animation Control/Activated/Expanded" unique_id=1423366340]
 editor_description = "Immediately go to the retracting state when the player is no longer present when entering this state."
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Waiting To Retract")
 guard = SubResource("Resource_22wfi")
+delay_in_seconds = "0.0"
 
-[node name="On Player Leave" type="Node" parent="StateChart/Root/Animation Control/Activated/Expanded"]
+[node name="On Player Leave" type="Node" parent="StateChart/Root/Animation Control/Activated/Expanded" unique_id=275663171]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Waiting To Retract")
 event = &"player_exited"
+delay_in_seconds = "0.0"
 
-[node name="Waiting To Retract" type="Node" parent="StateChart/Root/Animation Control/Activated"]
+[node name="Waiting To Retract" type="Node" parent="StateChart/Root/Animation Control/Activated" unique_id=309736114]
 script = ExtResource("7_a74k1")
 
-[node name="After  5 s" type="Node" parent="StateChart/Root/Animation Control/Activated/Waiting To Retract"]
+[node name="After  5 s" type="Node" parent="StateChart/Root/Animation Control/Activated/Waiting To Retract" unique_id=933934996]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../../Retracting")
-delay_seconds = 5.0
+delay_in_seconds = "5.0"
 
-[node name="On Player Enter" type="Node" parent="StateChart/Root/Animation Control/Activated/Waiting To Retract"]
+[node name="On Player Enter" type="Node" parent="StateChart/Root/Animation Control/Activated/Waiting To Retract" unique_id=1279576380]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Expanded")
 event = &"player_entered"
+delay_in_seconds = "0.0"
 
-[node name="Retracting" type="Node" parent="StateChart/Root/Animation Control"]
+[node name="Retracting" type="Node" parent="StateChart/Root/Animation Control" unique_id=1949197824]
 script = ExtResource("7_a74k1")
 
-[node name="After 1 s" type="Node" parent="StateChart/Root/Animation Control/Retracting"]
+[node name="After 1 s" type="Node" parent="StateChart/Root/Animation Control/Retracting" unique_id=620181799]
 script = ExtResource("8_7tjvh")
 to = NodePath("../../Idle")
-delay_seconds = 0.9
+delay_in_seconds = "0.9"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -57,7 +57,6 @@ func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	
 func _on_follow_state_physics_processing(delta):
 	if anim_tree_state.get_current_node() != "Follow":
-		print("enter follow state")
 		anim_tree_state.travel("Follow")
 	
 	if not target:

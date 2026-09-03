@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dge57hg82lnfg"]
+[gd_scene format=3 uid="uid://dge57hg82lnfg"]
 
 [ext_resource type="PackedScene" uid="uid://cb6w56tiropl7" path="res://addons/Styloo Guns Asset Pack GLTF FBX V1.1/Normal version Color and NormalMap/GLB/ak47.glb" id="2_n8cye"]
 
-[node name="basic_rifle" type="Node3D"]
+[node name="basic_rifle" type="Node3D" unique_id=632409943]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="ak472" parent="." instance=ExtResource("2_n8cye")]
+[node name="ak472" parent="." unique_id=1118854443 instance=ExtResource("2_n8cye")]

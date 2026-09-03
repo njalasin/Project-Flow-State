@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvrbfp870t0kd"]
+[gd_scene format=3 uid="uid://bvrbfp870t0kd"]
 
 [ext_resource type="Script" uid="uid://dn46gqfbbvsnk" path="res://addons/godot_state_charts_examples/platformer/fireworks_box/fireworks_box.gd" id="1_6vg3k"]
 [ext_resource type="Texture2D" uid="uid://roilgifkgiii" path="res://addons/godot_state_charts_examples/platformer/fireworks_box/box.png" id="1_aido8"]
@@ -145,10 +145,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_stxxq"]
 _data = {
-"RESET": SubResource("Animation_0njji"),
-"explode": SubResource("Animation_81tef"),
-"idle": SubResource("Animation_yw5k5"),
-"rattle": SubResource("Animation_tug1d")
+&"RESET": SubResource("Animation_0njji"),
+&"explode": SubResource("Animation_81tef"),
+&"idle": SubResource("Animation_yw5k5"),
+&"rattle": SubResource("Animation_tug1d")
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c15xx"]
@@ -156,84 +156,83 @@ lifetime_randomness = 0.17
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
 spread = 42.97
-gravity = Vector3(0, 20, 0)
 initial_velocity_min = 26.32
 initial_velocity_max = 52.63
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 20, 0)
 turbulence_noise_scale = 8.14
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ryt0"]
 
-[node name="FireworksBox" type="Node2D"]
+[node name="FireworksBox" type="Node2D" unique_id=597679457]
 script = ExtResource("1_6vg3k")
 
-[node name="Box" type="Sprite2D" parent="."]
+[node name="Box" type="Sprite2D" parent="." unique_id=845395407]
 position = Vector2(0, -10)
 texture = ExtResource("1_aido8")
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=892351159]
 editor_description = "A state chart controlling the rattling and explosion of a box. You can probably use a simple script to achieve the same behaviour but it shows how to use expression guards."
 script = ExtResource("2_ahjdl")
 track_in_editor = true
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=1565776060]
 script = ExtResource("3_b1cau")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root"]
+[node name="Idle" type="Node" parent="StateChart/Root" unique_id=1787470936]
 script = ExtResource("4_ot1ih")
 
-[node name="Rattle on Counter" type="Node" parent="StateChart/Root/Idle"]
+[node name="Rattle on Counter" type="Node" parent="StateChart/Root/Idle" unique_id=1687219701]
 script = ExtResource("6_bf3gq")
 to = NodePath("../../Rattling")
 event = &"counter_changed"
 guard = SubResource("Resource_y5h70")
+delay_in_seconds = "0.0"
 
-[node name="Rattling" type="Node" parent="StateChart/Root"]
+[node name="Rattling" type="Node" parent="StateChart/Root" unique_id=263472438]
 script = ExtResource("4_ot1ih")
 
-[node name="Explode on Counter" type="Node" parent="StateChart/Root/Rattling"]
+[node name="Explode on Counter" type="Node" parent="StateChart/Root/Rattling" unique_id=1722181577]
 script = ExtResource("6_bf3gq")
 to = NodePath("../../Exploding")
 event = &"counter_changed"
 guard = SubResource("Resource_lsbaa")
+delay_in_seconds = "0.0"
 
-[node name="Get back to Idle" type="Node" parent="StateChart/Root/Rattling"]
+[node name="Get back to Idle" type="Node" parent="StateChart/Root/Rattling" unique_id=1201221193]
 script = ExtResource("6_bf3gq")
 to = NodePath("../../Idle")
 event = &"counter_changed"
 guard = SubResource("Resource_t7gf7")
+delay_in_seconds = "0.0"
 
-[node name="Exploding" type="Node" parent="StateChart/Root"]
+[node name="Exploding" type="Node" parent="StateChart/Root" unique_id=73083868]
 script = ExtResource("4_ot1ih")
 
-[node name="Die after 4s" type="Node" parent="StateChart/Root/Exploding"]
+[node name="Die after 4s" type="Node" parent="StateChart/Root/Exploding" unique_id=1456365338]
 script = ExtResource("6_bf3gq")
 to = NodePath("../../Dead")
-delay_seconds = 4.0
+delay_in_seconds = "4.0"
 
-[node name="Dead" type="Node" parent="StateChart/Root"]
+[node name="Dead" type="Node" parent="StateChart/Root" unique_id=14544470]
 script = ExtResource("4_ot1ih")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=84029364]
 reset_on_save = false
-libraries = {
-"": SubResource("AnimationLibrary_stxxq")
-}
+libraries/ = SubResource("AnimationLibrary_stxxq")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=899883416]
 position = Vector2(0, -10)
 emitting = false
 amount = 300
-process_material = SubResource("ParticleProcessMaterial_c15xx")
 lifetime = 2.81
 one_shot = true
 explosiveness = 0.86
+process_material = SubResource("ParticleProcessMaterial_c15xx")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1549116438]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1673926928]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_4ryt0")
 

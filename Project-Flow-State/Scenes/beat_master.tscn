@@ -1,19 +1,25 @@
 [gd_scene format=3 uid="uid://du8brjhfanrxf"]
 
 [ext_resource type="Script" uid="uid://cl3l0fkonlksy" path="res://Assets/scripts/system/beat_master.gd" id="1_cvftw"]
-[ext_resource type="AudioStream" uid="uid://b5sf17gbwuw5a" path="res://Assets/sounds/songs/SPACE_WITH_BAD_GUYS_v2_120BPM.ogg" id="2_1varn"]
+[ext_resource type="AudioStream" uid="uid://bis1ws0mmx76r" path="res://Assets/sounds/music/licensed (do not ship)/Starjunk 95 - State Your Name.mp3" id="2_1varn"]
 
 [node name="BeatMaster" type="Node" unique_id=957818401]
 script = ExtResource("1_cvftw")
 bpm = 120
 audioSource = ExtResource("2_1varn")
 
-[node name="StartBuffer" type="Timer" parent="." unique_id=1587691053]
-wait_time = 0.001
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1339180920]
+volume_db = -30.0
+
+[node name="StartBuffer" type="Timer" parent="." unique_id=1204011873]
 one_shot = true
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1339180920]
-volume_db = -30.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1502530449]
+
+[node name="DebugLabel" type="Label" parent="CanvasLayer" unique_id=1250362496]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
 
 [connection signal="timeout" from="StartBuffer" to="." method="_on_start_buffer_timeout"]

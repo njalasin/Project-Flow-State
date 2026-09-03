@@ -34,6 +34,13 @@ albedo_texture = ExtResource("3_uda3f")
 albedo_texture = ExtResource("3_uda3f")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7apmo"]
+albedo_texture = ExtResource("3_uda3f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yluu"]
+albedo_texture = ExtResource("3_uda3f")
+uv1_triplanar = true
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4upxe"]
 
 [sub_resource type="Sky" id="Sky_7c4i5"]
@@ -123,6 +130,11 @@ material = SubResource("StandardMaterial3D_e33e4")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 5, 49.5)
 size = Vector3(1, 11, 98)
 material = SubResource("StandardMaterial3D_e33e4")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="NavigationRegion3D/Geometry/CSGCombiner3D" unique_id=1239956643]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 23.152407, 1.0000002, 0.34584093)
+material_override = SubResource("StandardMaterial3D_7apmo")
+material = SubResource("StandardMaterial3D_1yluu")
 
 [node name="Staircase" parent="NavigationRegion3D/Geometry" unique_id=904808647 instance=ExtResource("3_ev4ff")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -19.720648, 1.25, 0)

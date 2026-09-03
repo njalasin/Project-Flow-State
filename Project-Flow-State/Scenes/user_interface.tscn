@@ -1,18 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://d13u8a0s44d1h"]
+[gd_scene format=3 uid="uid://d13u8a0s44d1h"]
 
 [ext_resource type="Script" uid="uid://dwihj52htnkrg" path="res://Assets/scripts/player/reticle_draw.gd" id="1_7dkfn"]
 
-[node name="UserInterface" type="CanvasLayer"]
+[node name="UserInterface" type="CanvasLayer" unique_id=936171084]
 follow_viewport_enabled = true
 
-[node name="Reticle" type="CenterContainer" parent="."]
+[node name="Reticle" type="CenterContainer" parent="." unique_id=942146976]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ReticleDraw" type="Control" parent="Reticle"]
+[node name="ReticleDraw" type="Control" parent="Reticle" unique_id=1945001833]
 layout_mode = 2
 script = ExtResource("1_7dkfn")
 radius = 20.0

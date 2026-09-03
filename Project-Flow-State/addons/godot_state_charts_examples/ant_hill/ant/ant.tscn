@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dy43c80qlfftx"]
+[gd_scene format=3 uid="uid://dy43c80qlfftx"]
 
 [ext_resource type="Shader" uid="uid://bx4vu24rcr0m5" path="res://addons/godot_state_charts_examples/ant_hill/ant/ant.gdshader" id="1_01qat"]
 [ext_resource type="Texture2D" uid="uid://bqgc7cft671q0" path="res://addons/godot_state_charts_examples/ant_hill/ant/walk.png" id="1_7ajse"]
@@ -263,7 +263,7 @@ region = Rect2(1010, 1736, 202, 248)
 [sub_resource type="SpriteFrames" id="SpriteFrames_kcoy1"]
 animations = [{
 "frames": [],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -454,7 +454,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w0vp4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 64.0
 }]
@@ -466,7 +466,7 @@ height = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_htg24"]
 radius = 80.0
 
-[node name="Ant" type="CharacterBody2D"]
+[node name="Ant" type="CharacterBody2D" unique_id=468803625]
 z_index = 2048
 z_as_relative = false
 collision_layer = 16
@@ -477,194 +477,208 @@ safe_margin = 2.615
 script = ExtResource("1_i761n")
 marker_scene = ExtResource("2_lqnr1")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1237558070]
 material = SubResource("ShaderMaterial_bjtx1")
 rotation = 1.5708
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_kcoy1")
 animation = &"walk"
-frame_progress = 0.938219
+frame_progress = 0.19645908
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=780355385]
 editor_description = "This navigation agent sends the \"navigation_finished\" event to the state chart whenever the navigation is done."
 avoidance_enabled = true
 radius = 40.0
 max_speed = 50.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400593846]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_1lk3q")
 
-[node name="SensorArea" type="Area2D" parent="."]
+[node name="SensorArea" type="Area2D" parent="." unique_id=684259425]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorArea" unique_id=455345029]
 shape = SubResource("CircleShape2D_htg24")
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=433890589]
 script = ExtResource("3_lard5")
 track_in_editor = true
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=503165028]
 script = ExtResource("4_ejp2e")
 initial_state = NodePath("Initializing")
 
-[node name="Initializing" type="Node" parent="StateChart/Root"]
+[node name="Initializing" type="Node" parent="StateChart/Root" unique_id=1502810761]
 editor_description = "This state is used for script initialization."
 script = ExtResource("5_21sgy")
 
-[node name="Transition" type="Node" parent="StateChart/Root/Initializing"]
+[node name="Transition" type="Node" parent="StateChart/Root/Initializing" unique_id=1033980862]
 script = ExtResource("7_qj278")
 to = NodePath("../../Seeking Food")
 event = &"initialized"
+delay_in_seconds = "0.0"
 
-[node name="Seeking Food" type="Node" parent="StateChart/Root"]
+[node name="Seeking Food" type="Node" parent="StateChart/Root" unique_id=1552503777]
 editor_description = "In this state, the ant will look for food."
 script = ExtResource("4_ejp2e")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root/Seeking Food"]
+[node name="Idle" type="Node" parent="StateChart/Root/Seeking Food" unique_id=42920963]
 editor_description = "This state is active when the ant currently has no target. It is connected to the script which will look for a new target."
 script = ExtResource("5_21sgy")
 
-[node name="On Next Destination" type="Node" parent="StateChart/Root/Seeking Food/Idle"]
+[node name="On Next Destination" type="Node" parent="StateChart/Root/Seeking Food/Idle" unique_id=1338768172]
 script = ExtResource("7_qj278")
 to = NodePath("../../Travelling/Place Marker")
 event = &"destination_set"
+delay_in_seconds = "0.0"
 
-[node name="On Food Detected" type="Node" parent="StateChart/Root/Seeking Food/Idle"]
+[node name="On Food Detected" type="Node" parent="StateChart/Root/Seeking Food/Idle" unique_id=296196711]
 script = ExtResource("7_qj278")
 to = NodePath("../../../Picking up Food")
 event = &"food_detected"
+delay_in_seconds = "0.0"
 
-[node name="Travelling" type="Node" parent="StateChart/Root/Seeking Food"]
+[node name="Travelling" type="Node" parent="StateChart/Root/Seeking Food" unique_id=1858771902]
 script = ExtResource("4_ejp2e")
 initial_state = NodePath("Travel")
 
-[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Seeking Food/Travelling"]
+[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Seeking Food/Travelling" unique_id=1000981276]
 editor_description = "When navigation is finished return to idle state."
 script = ExtResource("7_qj278")
 to = NodePath("../../Idle")
 event = &"navigation_finished"
+delay_in_seconds = "0.0"
 
-[node name="Travel" type="Node" parent="StateChart/Root/Seeking Food/Travelling"]
+[node name="Travel" type="Node" parent="StateChart/Root/Seeking Food/Travelling" unique_id=2059393603]
 editor_description = "This state is active while the ant is travelling when searching for food. Periodically the state will be left for placing a marker."
 script = ExtResource("5_21sgy")
 
-[node name="Periodically Place Marker" type="Node" parent="StateChart/Root/Seeking Food/Travelling/Travel"]
+[node name="Periodically Place Marker" type="Node" parent="StateChart/Root/Seeking Food/Travelling/Travel" unique_id=67002220]
 editor_description = "While searching for food, periodically place a marker pointing towards the nest. This transition will move to the \"Place Marker\" state which will trigger the placement of the marker. The \"Place Marker\" state will immediately return back to the \"Travel\" state."
 script = ExtResource("7_qj278")
 to = NodePath("../../Place Marker")
-delay_seconds = 0.75
+delay_in_seconds = "0.75"
 
-[node name="Place Marker" type="Node" parent="StateChart/Root/Seeking Food/Travelling"]
+[node name="Place Marker" type="Node" parent="StateChart/Root/Seeking Food/Travelling" unique_id=1961229102]
 editor_description = "This state is briefly activated when the ant wants to place a marker. It will immediately exit again to the \"Travel\" state."
 script = ExtResource("5_21sgy")
 
-[node name="Return travelling" type="Node" parent="StateChart/Root/Seeking Food/Travelling/Place Marker"]
+[node name="Return travelling" type="Node" parent="StateChart/Root/Seeking Food/Travelling/Place Marker" unique_id=1538903867]
 script = ExtResource("7_qj278")
 to = NodePath("../../Travel")
+delay_in_seconds = "0.0"
 
-[node name="Picking up Food" type="Node" parent="StateChart/Root"]
+[node name="Picking up Food" type="Node" parent="StateChart/Root" unique_id=541970620]
 editor_description = "This state is active when the ant has detected food and wants to pick it up."
 script = ExtResource("4_ejp2e")
 initial_state = NodePath("Travelling")
 
-[node name="Travelling" type="Node" parent="StateChart/Root/Picking up Food"]
+[node name="Travelling" type="Node" parent="StateChart/Root/Picking up Food" unique_id=1004429974]
 editor_description = "This state is active while the ant is moving towards the food."
 script = ExtResource("5_21sgy")
 
-[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Picking up Food/Travelling"]
+[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Picking up Food/Travelling" unique_id=1166762345]
 editor_description = "When navigation is finished we can pick up the food."
 script = ExtResource("7_qj278")
 to = NodePath("../../Picking Up")
 event = &"navigation_finished"
+delay_in_seconds = "0.0"
 
-[node name="Picking Up" type="Node" parent="StateChart/Root/Picking up Food"]
+[node name="Picking Up" type="Node" parent="StateChart/Root/Picking up Food" unique_id=1208006406]
 editor_description = "This state is active when the ant has reached the food and now picks it up."
 script = ExtResource("5_21sgy")
 
-[node name="On Picked Up" type="Node" parent="StateChart/Root/Picking up Food/Picking Up"]
+[node name="On Picked Up" type="Node" parent="StateChart/Root/Picking up Food/Picking Up" unique_id=2098709183]
 editor_description = "When navigation is finished return to idle state."
 script = ExtResource("7_qj278")
 to = NodePath("../../../Returning Home")
 event = &"food_picked_up"
+delay_in_seconds = "0.0"
 
-[node name="On Food Vanished" type="Node" parent="StateChart/Root/Picking up Food/Picking Up"]
+[node name="On Food Vanished" type="Node" parent="StateChart/Root/Picking up Food/Picking Up" unique_id=37381340]
 editor_description = "When navigation is finished return to idle state."
 script = ExtResource("7_qj278")
 to = NodePath("../../../Seeking Food")
 event = &"food_vanished"
+delay_in_seconds = "0.0"
 
-[node name="Returning Home" type="Node" parent="StateChart/Root"]
+[node name="Returning Home" type="Node" parent="StateChart/Root" unique_id=1498234460]
 editor_description = "This state is active when the ant has found food and wants to return home."
 script = ExtResource("4_ejp2e")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root/Returning Home"]
+[node name="Idle" type="Node" parent="StateChart/Root/Returning Home" unique_id=1997469173]
 editor_description = "This state is active when the ant currently has no destination. It calls back into the script which will setup a new destination."
 script = ExtResource("5_21sgy")
 
-[node name="On Next Destination" type="Node" parent="StateChart/Root/Returning Home/Idle"]
+[node name="On Next Destination" type="Node" parent="StateChart/Root/Returning Home/Idle" unique_id=144021017]
 script = ExtResource("7_qj278")
 to = NodePath("../../Travelling")
 event = &"destination_set"
+delay_in_seconds = "0.0"
 
-[node name="On Nest Detected" type="Node" parent="StateChart/Root/Returning Home/Idle"]
+[node name="On Nest Detected" type="Node" parent="StateChart/Root/Returning Home/Idle" unique_id=217232264]
 script = ExtResource("7_qj278")
 to = NodePath("../../../Delivering Food")
 event = &"nest_detected"
+delay_in_seconds = "0.0"
 
-[node name="Travelling" type="Node" parent="StateChart/Root/Returning Home"]
+[node name="Travelling" type="Node" parent="StateChart/Root/Returning Home" unique_id=693340946]
 editor_description = "This state is active when the ant has a destination and is currently travelling."
 script = ExtResource("4_ejp2e")
 initial_state = NodePath("Travel")
 
-[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Returning Home/Travelling"]
+[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Returning Home/Travelling" unique_id=135458697]
 editor_description = "When navigation is finished return to idle state."
 script = ExtResource("7_qj278")
 to = NodePath("../../Idle")
 event = &"navigation_finished"
+delay_in_seconds = "0.0"
 
-[node name="Travel" type="Node" parent="StateChart/Root/Returning Home/Travelling"]
+[node name="Travel" type="Node" parent="StateChart/Root/Returning Home/Travelling" unique_id=1942733041]
 script = ExtResource("5_21sgy")
 
-[node name="Periodically Place Marker" type="Node" parent="StateChart/Root/Returning Home/Travelling/Travel"]
+[node name="Periodically Place Marker" type="Node" parent="StateChart/Root/Returning Home/Travelling/Travel" unique_id=1908453540]
 script = ExtResource("7_qj278")
 to = NodePath("../../Place Marker")
-delay_seconds = 1.0
+delay_in_seconds = "1.0"
 
-[node name="Place Marker" type="Node" parent="StateChart/Root/Returning Home/Travelling"]
+[node name="Place Marker" type="Node" parent="StateChart/Root/Returning Home/Travelling" unique_id=650243164]
 editor_description = "This state is active when the ant has a destination and is moving towards it."
 script = ExtResource("5_21sgy")
 
-[node name="Return travelling" type="Node" parent="StateChart/Root/Returning Home/Travelling/Place Marker"]
+[node name="Return travelling" type="Node" parent="StateChart/Root/Returning Home/Travelling/Place Marker" unique_id=1414928739]
 script = ExtResource("7_qj278")
 to = NodePath("../../Travel")
+delay_in_seconds = "0.0"
 
-[node name="Delivering Food" type="Node" parent="StateChart/Root"]
+[node name="Delivering Food" type="Node" parent="StateChart/Root" unique_id=1399813634]
 editor_description = "This state is active when the ant has detected the nest and wants to bring food back."
 script = ExtResource("4_ejp2e")
 initial_state = NodePath("Travelling")
 
-[node name="Travelling" type="Node" parent="StateChart/Root/Delivering Food"]
+[node name="Travelling" type="Node" parent="StateChart/Root/Delivering Food" unique_id=1901655071]
 editor_description = "This state is active when the ant is moving towards the nest."
 script = ExtResource("5_21sgy")
 
-[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Delivering Food/Travelling"]
+[node name="On Navigation Finish" type="Node" parent="StateChart/Root/Delivering Food/Travelling" unique_id=2104711816]
 editor_description = "When navigation is finished we can pick up the food."
 script = ExtResource("7_qj278")
 to = NodePath("../../Dropping")
 event = &"navigation_finished"
+delay_in_seconds = "0.0"
 
-[node name="Dropping" type="Node" parent="StateChart/Root/Delivering Food"]
+[node name="Dropping" type="Node" parent="StateChart/Root/Delivering Food" unique_id=275279551]
 editor_description = "This state is active when the ant is dropping the food off at the nest."
 script = ExtResource("5_21sgy")
 
-[node name="On Dropped" type="Node" parent="StateChart/Root/Delivering Food/Dropping"]
+[node name="On Dropped" type="Node" parent="StateChart/Root/Delivering Food/Dropping" unique_id=1395646515]
 editor_description = "When navigation is finished return to idle state."
 script = ExtResource("7_qj278")
 to = NodePath("../../../Seeking Food")
 event = &"food_dropped"
+delay_in_seconds = "0.0"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="ready" from="Sprite2D" to="Sprite2D" method="play" binds= ["walk"]]

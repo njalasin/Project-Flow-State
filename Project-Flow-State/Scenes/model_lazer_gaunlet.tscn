@@ -5,13 +5,13 @@
 
 [node name="Lazer_Gauntlet" unique_id=1774166217 instance=ExtResource("1_pd5td")]
 
-[node name="Ring1" parent="." index="1" unique_id=233538168]
+[node name="Ring1" parent="." index="1" unique_id=1627129012]
 transform = Transform3D(-4.371139e-08, 1.5, 0, -1, -6.556708e-08, 0, 0, 0, 1, 0.3, 0, 0)
 
-[node name="Ring2" parent="." index="3" unique_id=2049969502]
+[node name="Ring2" parent="." index="3" unique_id=197378397]
 transform = Transform3D(-4.371139e-08, 1.5, 0, -1, -6.556708e-08, 0, 0, 0, 1, 0.3, 0, 0)
 
-[node name="Bottom" parent="." index="4" unique_id=1674284451]
+[node name="Bottom" parent="." index="4" unique_id=585818839]
 transform = Transform3D(-1.6292068e-07, 1.5, 0, -1, -2.4438103e-07, 0, 0, 0, 1, 0.3, 0, 0)
 
 [node name="BottomAnim" type="AnimationPlayer" parent="." index="6" unique_id=1237342659]

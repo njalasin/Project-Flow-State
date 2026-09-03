@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8rr57grye1kw"]
+[gd_scene format=3 uid="uid://b8rr57grye1kw"]
 
 [ext_resource type="Script" uid="uid://bv6xx4hxfew5j" path="res://addons/godot_state_charts_examples/performance_test/state_chart_receiver.gd" id="1_44fbg"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="1_x4how"]
@@ -6,31 +6,31 @@
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="3_qtc2o"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="4_ue85n"]
 
-[node name="state_chart" type="Node2D"]
+[node name="state_chart" type="Node2D" unique_id=264316219]
 script = ExtResource("1_44fbg")
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=487753887]
 script = ExtResource("1_x4how")
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=1647827795]
 script = ExtResource("2_2eb2m")
 initial_state = NodePath("A")
 
-[node name="A" type="Node" parent="StateChart/Root"]
+[node name="A" type="Node" parent="StateChart/Root" unique_id=2061046069]
 script = ExtResource("3_qtc2o")
 
-[node name="To B" type="Node" parent="StateChart/Root/A"]
+[node name="To B" type="Node" parent="StateChart/Root/A" unique_id=1174497933]
 script = ExtResource("4_ue85n")
 to = NodePath("../../B")
-delay_seconds = 10.0
+delay_in_seconds = "10.0"
 
-[node name="B" type="Node" parent="StateChart/Root"]
+[node name="B" type="Node" parent="StateChart/Root" unique_id=39393427]
 script = ExtResource("3_qtc2o")
 
-[node name="To A" type="Node" parent="StateChart/Root/B"]
+[node name="To A" type="Node" parent="StateChart/Root/B" unique_id=1511691262]
 script = ExtResource("4_ue85n")
 to = NodePath("../../A")
-delay_seconds = 20.0
+delay_in_seconds = "20.0"
 
 [connection signal="state_processing" from="StateChart/Root/A" to="." method="_on_a_state_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/B" to="." method="_on_b_state_physics_processing"]

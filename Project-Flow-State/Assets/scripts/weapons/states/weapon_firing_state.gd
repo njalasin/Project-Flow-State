@@ -13,7 +13,6 @@ func _on_firing_state_entered() -> void:
 	
 	# Since we're in firing state, fire on state entry
 	weapon_controller.fire_weapon()
-	_evaluate_shot_timing()
 
 func _on_firing_state_physics_processing(delta: float) -> void:
 	if not weapon_controller:
@@ -42,9 +41,3 @@ func _on_firing_state_physics_processing(delta: float) -> void:
 		Managers.weapon_manager.reload(Managers.weapon_manager.current_slot)
 		print("Reloaded: ", Managers.weapon_manager.max_ammo, " bullets")
 		weapon_controller.weapon_state_chart.send_event("onIdle")
-
-func _evaluate_shot_timing() -> void:	
-	if not BeatMaster.was_on_beat():
-		return
-	print("On beat shot!")
-	# TODO add logic for on beat shooting (Damage Mult, Sounds, "Great"/"Goods")
