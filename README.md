@@ -4,20 +4,17 @@ A rhythm-driven FPS roguelike set in hand-crafted dungeons/levels, where every s
 Status: In active development (prototype stage)
 
 # Concept
-Players fight through roguelike dungeons where combat, movement, and dodging are timed to the beat of the soundtrack — missing the rhythm costs you precision and damage, while staying on-beat rewards higher damage and survivability. The long-term goal is both a quality hand-crafted singleplayer mode experienced through multiple hand-crafted levels complete with their own electronic soundtrack, and an endless mode where players can upload their own MP3s and generate looping dungeon runs synced to their own music.
+Players fight through roguelike dungeons where combat, movement, and dodging are timed to the beat of the soundtrack — missing the rhythm costs you precision and damage, while staying on-beat rewards higher damage and survivability. 
+The long-term goal is both a quality hand-crafted singleplayer mode experienced through multiple hand-crafted levels complete with their own electronic soundtrack, and an endless mode where players can upload their own MP3s and generate looping dungeon runs synced to their own music.
 
 # Planned / In-Progress Features
 Rhythm-synced combat and movement — core gameplay loop built around timing actions to music
-Roguelike dungeon generation — procedurally generated levels for replayability
 FPS shooting and dodging mechanics — fast-paced first-person combat layered on top of the rhythm system
 Custom MP3 upload (planned) — endless mode where players can import their own music and generate levels/loops synced to it
-Tech Stack
+
+# Tech Stack
 Engine: Godot
-Languages: [fill in — GDScript / C# / C++, whichever this repo actually uses]
 Key systems: finite state machines for character/enemy behavior, custom shader work for visual effects, character controller built for rhythm + FPS hybrid movement
-Project Structure
-Project-Flow-State/
-└── Project-Flow-State/   # Godot project root
 
 # Running the Project
 Install Godot (version 4.8 as of most recent commit)
